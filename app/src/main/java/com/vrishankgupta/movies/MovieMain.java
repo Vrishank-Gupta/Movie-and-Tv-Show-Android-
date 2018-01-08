@@ -53,13 +53,6 @@ public class MovieMain extends AppCompatActivity {
         }
 
         lvMovie = findViewById(R.id.lvMovie);
-        lvMovie.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-            }
-        });
-
         if(t==1)
         {
             new TopRatedTask().execute("https://api.themoviedb.org/3/movie/popular?api_key=091aa3d78da969a59546613254d71896&language=en-US&page=1");

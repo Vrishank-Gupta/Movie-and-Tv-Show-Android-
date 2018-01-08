@@ -11,6 +11,6 @@
         android:layout_height="wrap_content"
         android:padding="10dp"
         tools:listitem="@layout/lv_detail"
-        android:id="@+id/lvTv"/>
+        android:id="@+id/lvTv_show"/>
 
 </RelativeLayout>

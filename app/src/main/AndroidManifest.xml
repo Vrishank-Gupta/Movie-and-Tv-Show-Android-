@@ -23,7 +23,8 @@
         <activity android:name=".TvShowMain" />
         <activity android:name=".MovieOption" />
         <activity android:name=".TvOption" />
-        <activity android:name=".MovieDetail"></activity>
+        <activity android:name=".MovieDetail" />
+        <activity android:name=".TvDetail" />
     </application>
 
 </manifest>
