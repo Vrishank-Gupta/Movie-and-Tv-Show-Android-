@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context="com.vrishankgupta.movies.Option">
+  <TextView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+
+      android:text="Choose an option:-"
+      style="@style/Base.TextAppearance.AppCompat.Subhead"/>
+<TextView
+    android:layout_marginTop="80dp"
+    android:layout_width="match_parent"
+    android:textStyle="bold"
+    android:padding="20dp"
+    android:layout_height="wrap_content"
+    android:id="@+id/tvOption"
+    android:text="TV Shows"
+    style="@style/Base.TextAppearance.AppCompat.Headline"
+    android:layout_gravity="center"
+    android:gravity="center"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorPrimaryDark"/>
+
+    <TextView
+        android:layout_marginTop="80dp"
+        android:layout_width="match_parent"
+        android:textStyle="bold"
+        android:padding="20dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/movieOption"
+        android:text="Movies"
+        style="@style/Base.TextAppearance.AppCompat.Headline"
+        android:layout_gravity="center"
+        android:gravity="center"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorPrimaryDark"/>
+
+
+
+</LinearLayout>
