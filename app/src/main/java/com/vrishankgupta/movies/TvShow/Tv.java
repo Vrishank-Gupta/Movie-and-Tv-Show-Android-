@@ -5,7 +5,6 @@ import java.io.Serializable;
 /**
  * Created by vrishankgupta on 08/01/18.
  */
-//AIzaSyAVIMIkGnXbZKCTozbGpsbs7Q_chf_Wvh4
 public class Tv implements Serializable{
     private String original_name;
     private String vote_average;
