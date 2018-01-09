@@ -59,6 +59,7 @@ public class MovieDetail extends AppCompatActivity {
             topRatedMovie = (TopRatedMovie) getIntent().getExtras().getSerializable("MOVIE_DETAILS_TOP");
             if(topRatedMovie != null)
             {
+                setTitle(topRatedMovie.getOriginal_title());
                 Picasso.with(this).load("https://image.tmdb.org/t/p/w500/" + topRatedMovie.getPoster_path()).into(detailImage);
                 detailTitle.setText(topRatedMovie.getOriginal_title());
                 date.setText(topRatedMovie.getRelease_date());
@@ -78,6 +79,7 @@ public class MovieDetail extends AppCompatActivity {
             upcomingMovies = (UpcomingMovies) getIntent().getExtras().getSerializable("MOVIE_UPCOMING");
             if(upcomingMovies != null)
             {
+                setTitle(upcomingMovies.getOriginal_title());
                 Picasso.with(this).load("https://image.tmdb.org/t/p/w500/" + upcomingMovies.getPoster_path()).into(detailImage);
                 detailTitle.setText(upcomingMovies.getOriginal_title());
                 date.setText(upcomingMovies.getRelease_date());
@@ -164,8 +166,6 @@ public class MovieDetail extends AppCompatActivity {
                 JSONObject jsonObject1 = jsonArray.getJSONObject(0);
                 key = jsonObject1.getString("key");
                 Log.d("Youtube", key);
-//                INTENT for Youtube
-
             } catch (JSONException e) {
                 e.printStackTrace();
             }

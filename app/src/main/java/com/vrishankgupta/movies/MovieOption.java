@@ -24,6 +24,7 @@ public class MovieOption extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_option);
+        setTitle("Movies");
         mOptions.add("Popular");
         mOptions.add("Top Rated");
         mOptions.add("Upcoming");

@@ -12,6 +12,7 @@ public class Option extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTitle("Choose an option");
         setContentView(R.layout.activity_option);
         tvOption = findViewById(R.id.tvOption);
         movieOption = findViewById(R.id.movieOption);

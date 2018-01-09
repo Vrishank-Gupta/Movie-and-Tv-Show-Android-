@@ -33,6 +33,8 @@ public class TvDetail extends AppCompatActivity {
     TextView detailTitle1,date1,rating1,overview1;
     String key;
     Button youButTv,recommendTv;
+    Tv show;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,10 +47,11 @@ public class TvDetail extends AppCompatActivity {
         recommendTv = findViewById(R.id.recommendTv);
         overview1 = findViewById(R.id.overview1);
 
-        Tv show = (Tv)getIntent().getExtras().getSerializable("TvIntent");
+        show = (Tv)getIntent().getExtras().getSerializable("TvIntent");
 
         if(show !=null)
         {
+            setTitle(show.getOriginal_name());
             Picasso.with(this).load("https://image.tmdb.org/t/p/w500/" + show.getPoster_path()).into(detailImage1);
             detailTitle1.setText(show.getOriginal_name());
             date1.setText(show.getFirst_air_date());
@@ -72,7 +75,9 @@ public class TvDetail extends AppCompatActivity {
         recommendTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent i = new Intent(TvDetail.this,TvShowMain.class);
+                i.putExtra("TvRecommend",show.getId());
+                startActivity(i);
             }
         });
     }

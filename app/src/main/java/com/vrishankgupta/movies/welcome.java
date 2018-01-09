@@ -10,6 +10,7 @@ public class welcome extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTitle("Entertainment");
         setContentView(R.layout.welcome);
 
         Handler h = new Handler();
@@ -24,6 +25,7 @@ public class welcome extends AppCompatActivity {
                 finish();
             }
         };
+
 
         h.postDelayed(r,3000);
 

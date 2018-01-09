@@ -46,12 +46,15 @@ public class MovieMain extends AppCompatActivity {
             if (type != null) {
                 if (type.equals("Popular")) {
                     t = 1;
+                    setTitle("Popular Movies");
                     type = null;
                 } else if (type.equals("Top Rated")) {
                     t = 2;
                     type = null;
+                    setTitle("Top Rated Movies");
                 } else if (type.equals("Upcoming")) {
                     t = 3;
+                    setTitle("Upcoming Movies");
                     type = null;
                 } else
                     Toast.makeText(this, "Ohh,Snap!", Toast.LENGTH_SHORT).show();
@@ -70,11 +73,13 @@ public class MovieMain extends AppCompatActivity {
         else {
             if(upId !=null)
             {
+                new titleTask().execute("https://api.themoviedb.org/3/movie/"+upId+"?api_key=091aa3d78da969a59546613254d71896&language=en-US");
                 new upcomingTask().execute("https://api.themoviedb.org/3/movie/"+upId+"/recommendations?api_key=091aa3d78da969a59546613254d71896&language=en-US&page=1\n");
             }
 
             else if(topId !=null)
             {
+                new titleTask().execute("https://api.themoviedb.org/3/movie/"+topId+"?api_key=091aa3d78da969a59546613254d71896&language=en-US");
                 new TopRatedTask().execute("https://api.themoviedb.org/3/movie/"+topId+"/recommendations?api_key=091aa3d78da969a59546613254d71896&language=en-US&page=1\n");
 
             }
@@ -212,6 +217,44 @@ public class MovieMain extends AppCompatActivity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    class titleTask extends AsyncTask<String,Void,String>
+    {
+
+        @Override
+        protected String doInBackground(String... params) {
+            URL url = null;
+            try {
+                url = new URL(params[0]);
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+            try {
+                HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+                InputStream inputStream = urlConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+                String s = bufferedReader.readLine();
+                bufferedReader.close();
+                return s;
+            } catch (IOException e) {
+                Log.e("Error: ", e.getMessage(), e);
+            }
+            return null;
+        }
+
+
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            try {
+                JSONObject jsonObject = new JSONObject(s);
+                setTitle("Similar to "+jsonObject.getString("original_title"));
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
         }
     }
 }

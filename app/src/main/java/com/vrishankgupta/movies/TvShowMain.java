@@ -27,36 +27,51 @@ import java.util.ArrayList;
 public class TvShowMain extends AppCompatActivity {
 
     ListView lvTv;
+    Tv movies;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tv_show_main);
 
-
-        String type = getIntent().getExtras().getString("tvType");
-        Log.d("Check", type);
-
+        String tvId = getIntent().getExtras().getString("TvRecommend");
         lvTv = findViewById(R.id.lvTv_show);
+
+        if (tvId == null) {
+            String type = getIntent().getExtras().getString("tvType");
+
+            if (type.equals("On Air")) {
+                setTitle("On Air TV Shows");
+                new tvTask().execute("https://api.themoviedb.org/3/tv/on_the_air?api_key=091aa3d78da969a59546613254d71896&language=en-US&page=1");
+            }
+
+            else if (type.equals("Popular"))
+            {
+                setTitle("Popular TV Shows");
+                new tvTask().execute("https://api.themoviedb.org/3/tv/popular?api_key=091aa3d78da969a59546613254d71896&language=en-US&page=1");
+            }
+
+            else if (type.equals("Top Rated"))
+            {
+                setTitle("Top Rated TV Shows");
+                new tvTask().execute("https://api.themoviedb.org/3/tv/top_rated?api_key=091aa3d78da969a59546613254d71896&language=en-US&page=1");
+            }
+        }
+
+        else
+        {
+            new titleTask().execute("https://api.themoviedb.org/3/tv/" + tvId+ "?api_key=091aa3d78da969a59546613254d71896&language=en-US");
+            new tvTask().execute("https://api.themoviedb.org/3/tv/"+ tvId+ "/recommendations?api_key=091aa3d78da969a59546613254d71896&language=en-US&page=1");
+        }
+
         lvTv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent i = new Intent(TvShowMain.this,TvDetail.class);
-                i.putExtra("TvIntent",(Tv)parent.getItemAtPosition(position));
+                Intent i = new Intent(TvShowMain.this, TvDetail.class);
+                i.putExtra("TvIntent", (Tv) parent.getItemAtPosition(position));
                 Log.d("mainInt", "onItemClick: ");
                 startActivity(i);
             }
         });
-
-        if(type.equals("On Air"))
-            new tvTask().execute("https://api.themoviedb.org/3/tv/on_the_air?api_key=091aa3d78da969a59546613254d71896&language=en-US&page=1");
-
-        else if(type.equals("Popular"))
-            new tvTask().execute("https://api.themoviedb.org/3/tv/popular?api_key=091aa3d78da969a59546613254d71896&language=en-US&page=1");
-
-        else if(type.equals("Top Rated"))
-            new tvTask().execute("https://api.themoviedb.org/3/tv/top_rated?api_key=091aa3d78da969a59546613254d71896&language=en-US&page=1");
-
-
     }
 
     class tvTask extends AsyncTask<String,Void,String>
@@ -105,8 +120,9 @@ public class TvShowMain extends AppCompatActivity {
 
                 for(int i = 0;i<jsonArray.length();i++)
                 {
+
                     JSONObject object = jsonArray.getJSONObject(i);
-                    Tv movies = new Tv();
+                    movies = new Tv();
                     movies.setOriginal_name(object.getString("original_name"));
                     movies.setOverview(object.getString("overview"));
                     movies.setId(object.getString("id"));
@@ -123,6 +139,45 @@ public class TvShowMain extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
+    }
+
+
+    class titleTask extends AsyncTask<String,Void,String>
+    {
+        @Override
+        protected String doInBackground(String... params) {
+            URL url = null;
+            try {
+                url = new URL(params[0]);
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+            try {
+                HttpURLConnection urlConnection = null;
+                urlConnection = (HttpURLConnection) url.openConnection();
+                InputStream inputStream = urlConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+                String s = bufferedReader.readLine();
+                bufferedReader.close();
+
+                return s;
+
+            } catch (IOException e) {
+                Log.e("Error: ", e.getMessage(), e);
+            }
+            return null;
         }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            try {
+                JSONObject jsonObject = new JSONObject(s);
+                setTitle("Similar to "+jsonObject.getString("original_name"));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    }
  }
 

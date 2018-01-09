@@ -22,6 +22,7 @@ public class TvOption extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTitle("TV Shows");
         setContentView(R.layout.activity_tv_option);
 
 
