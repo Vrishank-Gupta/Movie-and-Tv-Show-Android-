@@ -26,9 +26,7 @@ public class TvDetail extends AppCompatActivity {
         overview1 = findViewById(R.id.overview1);
 
         Tv show = (Tv)getIntent().getExtras().getSerializable("TvIntent");
-//        Log.d("CheckInt", show.getOriginal_name());
-//
-//
+
         if(show !=null)
         {
             Picasso.with(this).load("https://image.tmdb.org/t/p/w500/" + show.getPoster_path()).into(detailImage1);

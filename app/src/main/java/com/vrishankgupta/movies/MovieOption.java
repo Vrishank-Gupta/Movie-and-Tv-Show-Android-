@@ -39,7 +39,6 @@ public class MovieOption extends AppCompatActivity {
                 intent.putExtra("Type", (String) parent.getItemAtPosition(position));
                 Log.d(TAG, (String) parent.getItemAtPosition(position));
                 startActivity(intent);
-
             }
         });
 
