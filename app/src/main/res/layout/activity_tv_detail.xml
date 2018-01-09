@@ -61,10 +61,10 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/rl1"
         android:gravity="center"
-        android:id="@+id/youLv"
+        android:id="@+id/youLvTv"
         android:layout_marginTop="20dp">
         <Button
-            android:id="@+id/youBut"
+            android:id="@+id/youButTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -76,7 +76,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/youLv"
+        android:layout_below="@id/youLvTv"
         android:padding="5dp"
         android:layout_marginTop="20dp"
         >
