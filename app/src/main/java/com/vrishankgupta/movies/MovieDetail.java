@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,8 +32,9 @@ import java.net.URL;
 public class MovieDetail extends AppCompatActivity {
 
     ImageView detailImage;
-    TextView detailTitle,date,rating,popularity,overview;
-    Button youButMovie,recommendMovie;
+    TextView detailTitle,date,rating,overview;
+    ImageButton youButMovie;
+    Button recommendMovie;
     String key;
     Boolean flag;
     TopRatedMovie topRatedMovie;
@@ -50,7 +52,6 @@ public class MovieDetail extends AppCompatActivity {
         detailTitle = findViewById(R.id.detailTitle);
         date = findViewById(R.id.date);
         rating = findViewById(R.id.rating);
-        popularity = findViewById(R.id.popularity);
         overview = findViewById(R.id.overview);
 
         if(MovieMain.t ==1 || MovieMain.t ==2)
@@ -60,11 +61,10 @@ public class MovieDetail extends AppCompatActivity {
             if(topRatedMovie != null)
             {
                 setTitle(topRatedMovie.getOriginal_title());
-                Picasso.with(this).load("https://image.tmdb.org/t/p/w500/" + topRatedMovie.getPoster_path()).into(detailImage);
+                Picasso.with(this).load("https://image.tmdb.org/t/p/w500/" + topRatedMovie.getBackdrop_path()).into(detailImage);
                 detailTitle.setText(topRatedMovie.getOriginal_title());
                 date.setText(topRatedMovie.getRelease_date());
                 rating.setText(rating.getText()+String.valueOf(topRatedMovie.getVote_average()));
-                popularity.setText(popularity.getText()+"Not Available");
                 overview.setText(topRatedMovie.getOverview());
                 flag =false;
                 new myTask().execute("http://api.themoviedb.org/3/movie/"+topRatedMovie.getId() +"/videos?api_key=091aa3d78da969a59546613254d71896");
@@ -80,11 +80,10 @@ public class MovieDetail extends AppCompatActivity {
             if(upcomingMovies != null)
             {
                 setTitle(upcomingMovies.getOriginal_title());
-                Picasso.with(this).load("https://image.tmdb.org/t/p/w500/" + upcomingMovies.getPoster_path()).into(detailImage);
+                Picasso.with(this).load("https://image.tmdb.org/t/p/w500/" + upcomingMovies.getBackdrop_path()).into(detailImage);
                 detailTitle.setText(upcomingMovies.getOriginal_title());
                 date.setText(upcomingMovies.getRelease_date());
                 rating.setText(rating.getText()+String.valueOf(upcomingMovies.getVote_average()));
-                popularity.setText(popularity.getText()+upcomingMovies.getPopularity());
                 overview.setText(upcomingMovies.getOverview());
                 flag = true;
                 new myTask().execute("http://api.themoviedb.org/3/movie/"+upcomingMovies.getId() +"/videos?api_key=091aa3d78da969a59546613254d71896");

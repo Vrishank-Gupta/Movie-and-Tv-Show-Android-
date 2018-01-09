@@ -149,6 +149,7 @@ public class MovieMain extends AppCompatActivity {
                     movies.setRelease_date(object.getString("release_date"));
                     movies.setVote_average(object.getString("vote_average"));
                     movies.setPoster_path(object.getString("poster_path"));
+                    movies.setBackdrop_path(object.getString("backdrop_path"));
                     upcomingMovies.add(movies);
                 }
                 UpcomingMovieAdapter movieArrayAdapter = new UpcomingMovieAdapter(MovieMain.this,R.layout.lv_detail,upcomingMovies);
@@ -208,6 +209,7 @@ public class MovieMain extends AppCompatActivity {
                     movieDetails.setOverview(object.getString("overview"));
                     movieDetails.setRelease_date(object.getString("release_date"));
                     movieDetails.setPoster_path(object.getString("poster_path"));
+                    movieDetails.setBackdrop_path(object.getString("backdrop_path"));
                     movieList.add(movieDetails);
                 }
 

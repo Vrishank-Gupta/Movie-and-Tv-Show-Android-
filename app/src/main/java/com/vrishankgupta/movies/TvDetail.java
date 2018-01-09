@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,7 +33,8 @@ public class TvDetail extends AppCompatActivity {
     ImageView detailImage1;
     TextView detailTitle1,date1,rating1,overview1;
     String key;
-    Button youButTv,recommendTv;
+    ImageButton youButTv;
+    Button recommendTv;
     Tv show;
 
     @Override
@@ -52,7 +54,7 @@ public class TvDetail extends AppCompatActivity {
         if(show !=null)
         {
             setTitle(show.getOriginal_name());
-            Picasso.with(this).load("https://image.tmdb.org/t/p/w500/" + show.getPoster_path()).into(detailImage1);
+            Picasso.with(this).load("https://image.tmdb.org/t/p/w500/" + show.getBackdrop_path()).into(detailImage1);
             detailTitle1.setText(show.getOriginal_name());
             date1.setText(show.getFirst_air_date());
             rating1.setText(rating1.getText()+String.valueOf(show.getVote_average()));

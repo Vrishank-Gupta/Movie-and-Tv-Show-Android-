@@ -11,7 +11,18 @@ public class TopRatedMovie implements Serializable{
     private double vote_average;
     private String original_title;
     private String overview;
+    private String release_date;
+    private String poster_path;
     private String id;
+    private String backdrop_path;
+
+    public String getBackdrop_path() {
+        return backdrop_path;
+    }
+
+    public void setBackdrop_path(String backdrop_path) {
+        this.backdrop_path = backdrop_path;
+    }
 
     public String getId() {
         return id;
@@ -20,9 +31,6 @@ public class TopRatedMovie implements Serializable{
     public void setId(String id) {
         this.id = id;
     }
-
-    private String release_date;
-    private String poster_path;
 
     public double getVote_average() {
         return vote_average;

@@ -9,6 +9,10 @@ public class Tv implements Serializable{
     private String original_name;
     private String vote_average;
     private String id;
+    private String first_air_date;
+    private String overview;
+    private String poster_path;
+    private String backdrop_path;
 
     public String getId() {
         return id;
@@ -18,9 +22,15 @@ public class Tv implements Serializable{
         this.id = id;
     }
 
-    private String first_air_date;
-    private String overview;
-    private String poster_path;
+
+
+    public String getBackdrop_path() {
+        return backdrop_path;
+    }
+
+    public void setBackdrop_path(String backdrop_path) {
+        this.backdrop_path = backdrop_path;
+    }
 
     public String getOriginal_name() {
         return original_name;

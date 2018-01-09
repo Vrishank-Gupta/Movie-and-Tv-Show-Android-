@@ -15,7 +15,7 @@
         <ImageView
             android:layout_width="200dp"
             android:layout_alignParentLeft="true"
-            android:layout_height="200dp"
+            android:layout_height="150dp"
             android:id="@+id/detailImage1"
             android:src="@mipmap/ic_launcher"
             />
@@ -51,8 +51,7 @@
             android:id="@+id/rating1"
             android:textSize="15sp"
             android:text="Ratings:- "
-            android:layout_below="@+id/date1"
-            android:layout_toRightOf="@id/detailImage1"
+            android:layout_below="@+id/detailImage1"
             />
     </RelativeLayout>
     <LinearLayout
@@ -60,17 +59,17 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/rl1"
         android:gravity="center"
-        android:weightSum="2"
+        android:weightSum="3"
         android:padding="10dp"
         android:id="@+id/youLvTv"
-        android:layout_marginTop="20dp">
-        <Button
+        android:layout_marginTop="8dp">
+        <ImageButton
             android:id="@+id/youButTv"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_weight="1"
-            android:text="Trailer"
+            android:layout_weight="2"
+            android:src="@drawable/trail"
             />
 
         <Button
@@ -89,7 +88,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/youLvTv"
         android:padding="5dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         >
         <TextView
             android:layout_width="wrap_content"

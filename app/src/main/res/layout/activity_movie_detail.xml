@@ -15,7 +15,7 @@
     <ImageView
         android:layout_width="200dp"
         android:layout_alignParentLeft="true"
-        android:layout_height="200dp"
+        android:layout_height="150dp"
         android:id="@+id/detailImage"
         android:src="@mipmap/ic_launcher"
         />
@@ -51,37 +51,25 @@
         android:id="@+id/rating"
         android:textSize="15sp"
         android:text="Ratings:- "
-        android:layout_below="@+id/date"
-        android:layout_toRightOf="@id/detailImage"
-        />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="10dp"
-        android:id="@+id/popularity"
-        android:textSize="15sp"
-        android:text="Popularity:- "
-        android:layout_below="@+id/rating"
-        android:layout_toEndOf="@id/detailImage"
+        android:layout_below="@+id/detailImage"
         />
     </RelativeLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/rl"
-        android:weightSum="2"
+        android:weightSum="3"
         android:padding="10dp"
         android:gravity="center"
         android:id="@+id/youLvMovie"
-        android:layout_marginTop="20dp">
-        <Button
+        android:layout_marginTop="8dp">
+        <ImageButton
             android:id="@+id/youButMovie"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_weight="1"
-            android:text="Trailer"
+            android:layout_weight="2"
+            android:src="@drawable/trail"
             />
         <Button
             android:layout_width="0dp"
@@ -89,6 +77,7 @@
             android:layout_weight="1"
             android:layout_marginStart="10dp"
             android:text="Similar"
+            android:src="@mipmap/ic_launcher"
             android:id="@+id/recommendMovie"/>
 
 
@@ -98,7 +87,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/youLvMovie"
         android:padding="5dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         >
         <TextView
             android:layout_width="wrap_content"
