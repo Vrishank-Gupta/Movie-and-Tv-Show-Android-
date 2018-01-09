@@ -11,6 +11,16 @@ public class UpcomingMovies implements Serializable {
     private String original_title;
     private String overview;
     private String release_date;
+    private String id;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     private String poster_path;
     private String popularity;
 

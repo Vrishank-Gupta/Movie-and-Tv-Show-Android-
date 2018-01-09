@@ -110,6 +110,7 @@ public class TvShowMain extends AppCompatActivity {
                     Tv movies = new Tv();
                     movies.setOriginal_name(object.getString("original_name"));
                     movies.setOverview(object.getString("overview"));
+                    movies.setId(object.getString("id"));
                     movies.setFirst_air_date(object.getString("first_air_date"));
                     movies.setVote_average(object.getString("vote_average"));
                     movies.setPoster_path(object.getString("poster_path"));

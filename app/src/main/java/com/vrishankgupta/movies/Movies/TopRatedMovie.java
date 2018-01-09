@@ -11,6 +11,15 @@ public class TopRatedMovie implements Serializable{
     private double vote_average;
     private String original_title;
     private String overview;
+    private String id;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     private String release_date;
     private String poster_path;

@@ -127,6 +127,7 @@ public class MovieMain extends AppCompatActivity {
                     JSONObject object = jsonArray.getJSONObject(i);
                     UpcomingMovies movies = new UpcomingMovies();
                     movies.setOriginal_title(object.getString("original_title"));
+                    movies.setId(object.getString("id"));
                     movies.setOverview(object.getString("overview"));
                     movies.setPopularity(object.getString("popularity"));
                     movies.setRelease_date(object.getString("release_date"));
@@ -188,6 +189,7 @@ public class MovieMain extends AppCompatActivity {
                     TopRatedMovie movieDetails = new TopRatedMovie();
                     movieDetails.setOriginal_title(object.getString("original_title"));
                     movieDetails.setVote_average(object.getDouble("vote_average"));
+                    movieDetails.setId(object.getString("id"));
                     movieDetails.setOverview(object.getString("overview"));
                     movieDetails.setRelease_date(object.getString("release_date"));
                     movieDetails.setPoster_path(object.getString("poster_path"));

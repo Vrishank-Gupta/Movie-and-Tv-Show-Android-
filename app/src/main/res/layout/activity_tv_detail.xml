@@ -56,10 +56,27 @@
             android:layout_toRightOf="@id/detailImage1"
             />
     </RelativeLayout>
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/rl1"
+        android:gravity="center"
+        android:id="@+id/youLv"
+        android:layout_marginTop="20dp">
+        <Button
+            android:id="@+id/youBut"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Trailer"
+            />
+
+
+    </LinearLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/youLv"
         android:padding="5dp"
         android:layout_marginTop="20dp"
         >

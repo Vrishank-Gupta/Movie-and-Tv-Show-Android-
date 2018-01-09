@@ -2,6 +2,7 @@ package com.vrishankgupta.movies;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -14,12 +15,14 @@ public class MovieDetail extends AppCompatActivity {
 
     ImageView detailImage;
     TextView detailTitle,date,rating,popularity,overview;
+    Button youButMovie;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_detail);
 
         detailImage = findViewById(R.id.detailImage);
+        youButMovie = findViewById(R.id.youButMovie);
 
         detailTitle = findViewById(R.id.detailTitle);
         date = findViewById(R.id.date);
