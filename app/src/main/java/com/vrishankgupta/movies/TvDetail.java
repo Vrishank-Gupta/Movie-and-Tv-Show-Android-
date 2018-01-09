@@ -32,7 +32,7 @@ public class TvDetail extends AppCompatActivity {
     ImageView detailImage1;
     TextView detailTitle1,date1,rating1,overview1;
     String key;
-    Button youButTv;
+    Button youButTv,recommendTv;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +42,7 @@ public class TvDetail extends AppCompatActivity {
         detailTitle1 = findViewById(R.id.detailTitle1);
         date1 = findViewById(R.id.date1);
         rating1 = findViewById(R.id.rating1);
+        recommendTv = findViewById(R.id.recommendTv);
         overview1 = findViewById(R.id.overview1);
 
         Tv show = (Tv)getIntent().getExtras().getSerializable("TvIntent");
@@ -65,6 +66,13 @@ public class TvDetail extends AppCompatActivity {
                 Log.d("TYD", "onClick: ");
                 Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("vnd.youtube:" + key));
                 startActivity(i);
+            }
+        });
+
+        recommendTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
             }
         });
     }

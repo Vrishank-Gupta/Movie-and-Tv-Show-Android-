@@ -3,8 +3,8 @@ package com.vrishankgupta.movies;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -26,21 +26,24 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
-import java.net.URI;
 import java.net.URL;
-import java.util.ArrayList;
 
 public class MovieDetail extends AppCompatActivity {
 
     ImageView detailImage;
     TextView detailTitle,date,rating,popularity,overview;
-    Button youButMovie;
+    Button youButMovie,recommendMovie;
     String key;
+    Boolean flag;
+    TopRatedMovie topRatedMovie;
+    UpcomingMovies upcomingMovies;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_detail);
 
+        recommendMovie = findViewById(R.id.recommendMovie);
         detailImage = findViewById(R.id.detailImage);
         youButMovie = findViewById(R.id.youButMovie);
 
@@ -52,7 +55,8 @@ public class MovieDetail extends AppCompatActivity {
 
         if(MovieMain.t ==1 || MovieMain.t ==2)
         {
-            TopRatedMovie topRatedMovie = (TopRatedMovie) getIntent().getExtras().getSerializable("MOVIE_DETAILS_TOP");
+
+            topRatedMovie = (TopRatedMovie) getIntent().getExtras().getSerializable("MOVIE_DETAILS_TOP");
             if(topRatedMovie != null)
             {
                 Picasso.with(this).load("https://image.tmdb.org/t/p/w500/" + topRatedMovie.getPoster_path()).into(detailImage);
@@ -61,6 +65,7 @@ public class MovieDetail extends AppCompatActivity {
                 rating.setText(rating.getText()+String.valueOf(topRatedMovie.getVote_average()));
                 popularity.setText(popularity.getText()+"Not Available");
                 overview.setText(topRatedMovie.getOverview());
+                flag =false;
                 new myTask().execute("http://api.themoviedb.org/3/movie/"+topRatedMovie.getId() +"/videos?api_key=091aa3d78da969a59546613254d71896");
 
             }
@@ -70,7 +75,7 @@ public class MovieDetail extends AppCompatActivity {
 
         else if(MovieMain.t==3)
         {
-            UpcomingMovies upcomingMovies = (UpcomingMovies) getIntent().getExtras().getSerializable("MOVIE_UPCOMING");
+            upcomingMovies = (UpcomingMovies) getIntent().getExtras().getSerializable("MOVIE_UPCOMING");
             if(upcomingMovies != null)
             {
                 Picasso.with(this).load("https://image.tmdb.org/t/p/w500/" + upcomingMovies.getPoster_path()).into(detailImage);
@@ -79,6 +84,7 @@ public class MovieDetail extends AppCompatActivity {
                 rating.setText(rating.getText()+String.valueOf(upcomingMovies.getVote_average()));
                 popularity.setText(popularity.getText()+upcomingMovies.getPopularity());
                 overview.setText(upcomingMovies.getOverview());
+                flag = true;
                 new myTask().execute("http://api.themoviedb.org/3/movie/"+upcomingMovies.getId() +"/videos?api_key=091aa3d78da969a59546613254d71896");
             }
             else
@@ -97,6 +103,26 @@ public class MovieDetail extends AppCompatActivity {
             }
         });
 
+        recommendMovie.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(flag)
+                {
+                    Intent i = new Intent(MovieDetail.this,MovieMain.class);
+                    i.putExtra("upcoming",upcomingMovies.getId());
+                    startActivity(i);
+                }
+
+                else
+                {
+                    Intent i = new Intent(MovieDetail.this,MovieMain.class);
+                    i.putExtra("popular",topRatedMovie.getId());
+                    startActivity(i);
+                }
+
+            }
+        });
+
     }
 
 
@@ -111,7 +137,7 @@ public class MovieDetail extends AppCompatActivity {
                 e.printStackTrace();
             }
             try {
-                HttpURLConnection urlConnection = null;
+                HttpURLConnection urlConnection;
                 urlConnection = (HttpURLConnection) url.openConnection();
                 InputStream inputStream = urlConnection.getInputStream();
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));

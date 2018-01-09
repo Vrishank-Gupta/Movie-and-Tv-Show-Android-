@@ -29,45 +29,56 @@ import java.util.ArrayList;
 public class MovieMain extends AppCompatActivity {
     static int t=0;
     ListView lvMovie;
+    String type;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_main);
-        String type = getIntent().getExtras().getString("Type");
+        String upId = getIntent().getExtras().getString("upcoming");
+        String topId = getIntent().getExtras().getString("popular");
+        lvMovie = findViewById(R.id.lvMovie);
 
-        if(type!= null)
-        {
-            if(type.equals("Popular"))
+        if(upId == null && topId == null) {
+            type = getIntent().getExtras().getString("Type");
+
+
+            if (type != null) {
+                if (type.equals("Popular")) {
+                    t = 1;
+                    type = null;
+                } else if (type.equals("Top Rated")) {
+                    t = 2;
+                    type = null;
+                } else if (type.equals("Upcoming")) {
+                    t = 3;
+                    type = null;
+                } else
+                    Toast.makeText(this, "Ohh,Snap!", Toast.LENGTH_SHORT).show();
+
+
+                if (t == 1) {
+                    new TopRatedTask().execute("https://api.themoviedb.org/3/movie/popular?api_key=091aa3d78da969a59546613254d71896&language=en-US&page=1");
+                } else if (t == 2) {
+                    new TopRatedTask().execute("https://api.themoviedb.org/3/movie/top_rated?api_key=091aa3d78da969a59546613254d71896&language=en-US&page=1");
+                } else if (t == 3) {
+                    new upcomingTask().execute("https://api.themoviedb.org/3/movie/upcoming?api_key=091aa3d78da969a59546613254d71896&language=en-US&page=1");
+                }
+            }
+        }
+
+        else {
+            if(upId !=null)
             {
-                t=1;
+                new upcomingTask().execute("https://api.themoviedb.org/3/movie/"+upId+"/recommendations?api_key=091aa3d78da969a59546613254d71896&language=en-US&page=1\n");
             }
 
-            else if(type.equals("Top Rated"))
-                t=2;
+            else if(topId !=null)
+            {
+                new TopRatedTask().execute("https://api.themoviedb.org/3/movie/"+topId+"/recommendations?api_key=091aa3d78da969a59546613254d71896&language=en-US&page=1\n");
 
-            else if(type.equals("Upcoming"))
-                t=3;
-
-            else
-                Toast.makeText(this, "Ohh,Snap!", Toast.LENGTH_SHORT).show();
+            }
         }
-
-        lvMovie = findViewById(R.id.lvMovie);
-        if(t==1)
-        {
-            new TopRatedTask().execute("https://api.themoviedb.org/3/movie/popular?api_key=091aa3d78da969a59546613254d71896&language=en-US&page=1");
-        }
-
-        else if(t==2)
-        {
-            new TopRatedTask().execute("https://api.themoviedb.org/3/movie/top_rated?api_key=091aa3d78da969a59546613254d71896&language=en-US&page=1");
-        }
-
-        else if(t==3)
-        {
-            new upcomingTask().execute("https://api.themoviedb.org/3/movie/upcoming?api_key=091aa3d78da969a59546613254d71896&language=en-US&page=1");
-        }
-
 
         lvMovie.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -184,7 +195,6 @@ public class MovieMain extends AppCompatActivity {
 
                 for (int i =0; i<jsonArray.length();i++)
                 {
-
                     JSONObject object = jsonArray.getJSONObject(i);
                     TopRatedMovie movieDetails = new TopRatedMovie();
                     movieDetails.setOriginal_title(object.getString("original_title"));
@@ -194,7 +204,6 @@ public class MovieMain extends AppCompatActivity {
                     movieDetails.setRelease_date(object.getString("release_date"));
                     movieDetails.setPoster_path(object.getString("poster_path"));
                     movieList.add(movieDetails);
-
                 }
 
                 MovieArrayAdapter movieArrayAdapter = new MovieArrayAdapter(MovieMain.this,R.layout.lv_detail,movieList);

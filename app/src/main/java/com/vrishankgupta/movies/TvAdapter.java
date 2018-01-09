@@ -11,10 +11,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
-import com.vrishankgupta.movies.Movies.TopRatedMovie;
 import com.vrishankgupta.movies.TvShow.Tv;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

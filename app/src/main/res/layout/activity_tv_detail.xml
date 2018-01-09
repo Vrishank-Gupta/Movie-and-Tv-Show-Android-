@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:orientation="vertical"
@@ -61,14 +60,26 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/rl1"
         android:gravity="center"
+        android:weightSum="2"
+        android:padding="10dp"
         android:id="@+id/youLvTv"
         android:layout_marginTop="20dp">
         <Button
             android:id="@+id/youButTv"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_weight="1"
             android:text="Trailer"
+            />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="10dp"
+            android:text="Similar"
+            android:id="@+id/recommendTv"
             />
 
 
