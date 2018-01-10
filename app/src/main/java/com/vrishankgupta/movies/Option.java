@@ -16,6 +16,7 @@ public class Option extends AppCompatActivity {
     EditText searchEt;
     ImageButton searchBut;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +27,7 @@ public class Option extends AppCompatActivity {
 
         searchBut = findViewById(R.id.searchBut);
         searchEt = findViewById(R.id.searchEt);
+        searchEt.setText("");
 
         searchBut.setOnClickListener(new View.OnClickListener() {
             @Override

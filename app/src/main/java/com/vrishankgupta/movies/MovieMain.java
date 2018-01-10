@@ -1,6 +1,7 @@
 package com.vrishankgupta.movies;
 
 import android.content.Intent;
+import android.graphics.Movie;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,7 +11,6 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.vrishankgupta.movies.Movies.TopRatedMovie;
 import com.vrishankgupta.movies.Movies.Movies;
 
 import org.json.JSONArray;
@@ -21,6 +21,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.Serializable;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -91,7 +92,7 @@ public class MovieMain extends AppCompatActivity {
 
                 Intent intent = new Intent(MovieMain.this, MovieDetail.class);
                 if(t==1 || t==2)
-                intent.putExtra("MOVIE_DETAILS_TOP", (TopRatedMovie)parent.getItemAtPosition(position));
+                intent.putExtra("MOVIE_DETAILS_TOP", (Movies) parent.getItemAtPosition(position));
 
                 else
                     intent.putExtra("MOVIE_UPCOMING",(Movies)parent.getItemAtPosition(position));
@@ -153,7 +154,7 @@ public class MovieMain extends AppCompatActivity {
                     movies.setLanguage(object.getString("original_language"));
                     upcomingMovies.add(movies);
                 }
-                UpcomingMovieAdapter movieArrayAdapter = new UpcomingMovieAdapter(MovieMain.this,R.layout.lv_detail,upcomingMovies);
+                MovieArrayAdapter movieArrayAdapter = new MovieArrayAdapter(MovieMain.this,R.layout.lv_detail,upcomingMovies);
 
                 lvMovie.setAdapter(movieArrayAdapter);
 
@@ -196,16 +197,16 @@ public class MovieMain extends AppCompatActivity {
 
                 jsonObject = new JSONObject(s);
 
-                ArrayList<TopRatedMovie> movieList = new ArrayList<>();
+                ArrayList<Movies> movieList = new ArrayList<>();
 
                 JSONArray jsonArray = jsonObject.getJSONArray("results");
 
                 for (int i =0; i<jsonArray.length();i++)
                 {
                     JSONObject object = jsonArray.getJSONObject(i);
-                    TopRatedMovie movieDetails = new TopRatedMovie();
+                    Movies movieDetails = new Movies();
                     movieDetails.setOriginal_title(object.getString("original_title"));
-                    movieDetails.setVote_average(object.getDouble("vote_average"));
+                    movieDetails.setVote_average(object.getString("vote_average"));
                     movieDetails.setId(object.getString("id"));
                     movieDetails.setOverview(object.getString("overview"));
                     movieDetails.setRelease_date(object.getString("release_date"));

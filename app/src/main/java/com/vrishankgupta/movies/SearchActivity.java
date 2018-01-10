@@ -1,12 +1,16 @@
 package com.vrishankgupta.movies;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.vrishankgupta.movies.Search.SearchItem;
+import com.vrishankgupta.movies.TvShow.Tv;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -24,6 +28,7 @@ import java.util.ArrayList;
 public class SearchActivity extends AppCompatActivity {
 
     ListView lv;
+    String type;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,12 +40,21 @@ public class SearchActivity extends AppCompatActivity {
         setTitle("Search result for:- " + query);
 
         new myTask().execute("https://api.themoviedb.org/3/search/multi?api_key=091aa3d78da969a59546613254d71896&query="+query+"&page=1&include_adult=true");
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent i = new Intent(SearchActivity.this,SearchDetail.class);
+                i.putExtra("searchIntent",(SearchItem)parent.getItemAtPosition(position));
+                startActivity(i);
+            }
+        });
     }
 
 
     class myTask extends AsyncTask<String,Void,String>
     {
         @Override
+
         protected String doInBackground(String... strings) {
 
             try {
@@ -53,6 +67,7 @@ public class SearchActivity extends AppCompatActivity {
                 return s;
             } catch (MalformedURLException e) {
                 e.printStackTrace();
+                Log.d("Con", "doInBackground: ");
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -74,7 +89,12 @@ public class SearchActivity extends AppCompatActivity {
                     JSONObject object = jsonArray.getJSONObject(i);
                     SearchItem searchItem = new SearchItem();
 
-                    searchItem.setBackdrop_path(object.getString("backdrop_path"));
+                    if(object.getString("backdrop_path") == null || object.getString("backdrop_path").equals("") )
+                    {
+                        searchItem.setBackdrop_path(object.getString("poster_path"));
+                    }
+                    else
+                      searchItem.setBackdrop_path(object.getString("backdrop_path"));
                     searchItem.setOriginal_language(object.getString("original_language"));
                     searchItem.setOverview(object.getString("overview"));
                     searchItem.setPoster_path(object.getString("poster_path"));
@@ -88,6 +108,8 @@ public class SearchActivity extends AppCompatActivity {
                         searchItem.setOriginal_title(object.getString("original_name"));
                     }
                     searchItem.setVote_average(object.getString("vote_average"));
+                    searchItem.setId(object.getString("id"));
+                    searchItem.setType(object.getString("media_type"));
                     searchItems.add(searchItem);
 
                 }

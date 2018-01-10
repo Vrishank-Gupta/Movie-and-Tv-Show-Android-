@@ -1,6 +1,7 @@
 package com.vrishankgupta.movies;
 
 import android.content.Intent;
+import android.graphics.Movie;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -14,7 +15,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
-import com.vrishankgupta.movies.Movies.TopRatedMovie;
 import com.vrishankgupta.movies.Movies.Movies;
 
 import org.json.JSONArray;
@@ -37,7 +37,7 @@ public class MovieDetail extends AppCompatActivity {
     Button recommendMovie;
     String key;
     Boolean flag;
-    TopRatedMovie topRatedMovie;
+    Movies topRatedMovie;
     Movies movies;
 
     @Override
@@ -58,7 +58,7 @@ public class MovieDetail extends AppCompatActivity {
         if(MovieMain.t ==1 || MovieMain.t ==2)
         {
 
-            topRatedMovie = (TopRatedMovie) getIntent().getExtras().getSerializable("MOVIE_DETAILS_TOP");
+            topRatedMovie = (Movies) getIntent().getExtras().getSerializable("MOVIE_DETAILS_TOP");
             if(topRatedMovie != null)
             {
                 setTitle(topRatedMovie.getOriginal_title());
@@ -67,7 +67,7 @@ public class MovieDetail extends AppCompatActivity {
                 date.setText(topRatedMovie.getRelease_date());
                 rating.setText(rating.getText()+String.valueOf(topRatedMovie.getVote_average()));
                 overview.setText(topRatedMovie.getOverview());
-                language.setText(topRatedMovie.getLanguage());
+                language.setText(language.getText()+topRatedMovie.getLanguage());
                 flag =false;
                 new myTask().execute("http://api.themoviedb.org/3/movie/"+topRatedMovie.getId() +"/videos?api_key=091aa3d78da969a59546613254d71896");
 

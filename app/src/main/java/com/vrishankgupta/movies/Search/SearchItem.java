@@ -1,17 +1,37 @@
 package com.vrishankgupta.movies.Search;
 
+import java.io.Serializable;
+
 /**
  * Created by vrishankgupta on 10/01/18.
  */
 
-public class SearchItem {
+public class SearchItem implements Serializable {
     private String vote_average;
     private String original_title;
     private String poster_path;
     private String backdrop_path;
     private String original_language;
     private String overview;
+    private String id;
     private String release_date;
+    private String type;
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getVote_average() {
         return vote_average;
