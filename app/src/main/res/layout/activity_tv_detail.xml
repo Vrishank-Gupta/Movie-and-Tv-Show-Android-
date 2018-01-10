@@ -58,6 +58,25 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/detailImage1"
+            android:layout_below="@id/language1"
+            android:layout_marginTop="5dp"
+            android:text="Season Count:- "
+            android:layout_marginStart="5dp"
+            android:id="@+id/seasons"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/detailImage1"
+            android:layout_below="@id/seasons"
+            android:layout_marginTop="5dp"
+            android:text="Episode Count:- "
+            android:layout_marginStart="5dp"
+            android:id="@+id/episode"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="10dp"
             android:id="@+id/rating1"

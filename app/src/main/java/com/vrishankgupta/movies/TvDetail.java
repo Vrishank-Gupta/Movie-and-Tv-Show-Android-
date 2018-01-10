@@ -31,7 +31,7 @@ import java.net.URL;
 public class TvDetail extends AppCompatActivity {
 
     ImageView detailImage1;
-    TextView detailTitle1,date1,rating1,overview1,language;
+    TextView detailTitle1,date1,rating1,overview1,language,seasons,episode;
     String key;
     ImageButton youButTv;
     Button recommendTv;
@@ -43,6 +43,8 @@ public class TvDetail extends AppCompatActivity {
         setContentView(R.layout.activity_tv_detail);
         detailImage1 = findViewById(R.id.detailImage1);
         youButTv = findViewById(R.id.youButTv);
+        seasons = findViewById(R.id.seasons);
+        episode = findViewById(R.id.episode);
         detailTitle1 = findViewById(R.id.detailTitle1);
         date1 = findViewById(R.id.date1);
         rating1 = findViewById(R.id.rating1);
@@ -60,9 +62,10 @@ public class TvDetail extends AppCompatActivity {
             date1.setText(show.getFirst_air_date());
             rating1.setText(rating1.getText()+String.valueOf(show.getVote_average()));
             overview1.setText(show.getOverview());
+            seasons.setText(seasons.getText()+show.getSeasonCount());
+            episode.setText(episode.getText()+show.getEpisodeCount());
             language.setText(language.getText()+show.getLanguage());
             new myTask().execute("http://api.themoviedb.org/3/tv/"+show.getId() +"/videos?api_key=091aa3d78da969a59546613254d71896");
-
         }
         else
             Toast.makeText(this, "Some Error", Toast.LENGTH_SHORT).show();
@@ -124,7 +127,6 @@ public class TvDetail extends AppCompatActivity {
                 JSONObject jsonObject1 = jsonArray.getJSONObject(0);
                 key = jsonObject1.getString("key");
                 Log.d("Youtube", key);
-//                INTENT for Youtube
 
             } catch (JSONException e) {
                 e.printStackTrace();

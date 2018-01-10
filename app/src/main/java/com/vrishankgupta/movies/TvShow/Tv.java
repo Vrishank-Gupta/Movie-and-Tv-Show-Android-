@@ -13,6 +13,26 @@ public class Tv implements Serializable{
     private String overview;
     private String poster_path;
     private String backdrop_path;
+    private String language;
+    private String seasonCount;
+    private String episodeCount;
+
+    public String getSeasonCount() {
+        return seasonCount;
+    }
+
+    public void setSeasonCount(String seasonCount) {
+        this.seasonCount = seasonCount;
+    }
+
+    public String getEpisodeCount() {
+        return episodeCount;
+    }
+
+    public void setEpisodeCount(String episodeCount) {
+        this.episodeCount = episodeCount;
+    }
+
     public String getLanguage() {
         return language;
     }
@@ -21,7 +41,6 @@ public class Tv implements Serializable{
         this.language = language;
     }
 
-    private String language;
 
     public String getId() {
         return id;
