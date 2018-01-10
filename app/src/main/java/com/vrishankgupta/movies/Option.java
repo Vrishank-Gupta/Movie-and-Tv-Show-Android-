@@ -37,7 +37,7 @@ public class Option extends AppCompatActivity {
                     Toast.makeText(Option.this, "Enter Search Data", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    String query = String.valueOf(searchEt.getText());
+                    String query = String.valueOf(searchEt.getText()).replaceAll(" ","%20");
                     Intent i = new Intent(Option.this, SearchActivity.class);
                     i.putExtra("query", query);
                     startActivity(i);

@@ -35,9 +35,8 @@ public class SearchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search);
 
         String query = getIntent().getExtras().getString("query");
-        Log.d("Int", "onCreate: query");
         lv = findViewById(R.id.searchLv);
-        setTitle("Search result for:- " + query);
+        setTitle("Search result for:- " + query.replaceAll("%20"," "));
 
         new myTask().execute("https://api.themoviedb.org/3/search/multi?api_key=091aa3d78da969a59546613254d71896&query="+query+"&page=1&include_adult=true");
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -65,9 +64,6 @@ public class SearchActivity extends AppCompatActivity {
                 String s = bufferedReader.readLine();
                 bufferedReader.close();
                 return s;
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-                Log.d("Con", "doInBackground: ");
             } catch (IOException e) {
                 e.printStackTrace();
             }
