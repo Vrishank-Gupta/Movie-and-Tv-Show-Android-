@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
-import com.vrishankgupta.movies.Movies.UpcomingMovies;
+import com.vrishankgupta.movies.Movies.Movies;
 
 import java.util.List;
 
@@ -20,14 +20,14 @@ import java.util.List;
  */
 
 public class UpcomingMovieAdapter extends ArrayAdapter {
-    private List<UpcomingMovies> movieDetailsList;
+    private List<Movies> movieDetailsList;
 
     private int resource;
 
     private Context context;
 
 
-    public UpcomingMovieAdapter(Context context, int resource, List<UpcomingMovies> movieDetails) {
+    public UpcomingMovieAdapter(Context context, int resource, List<Movies> movieDetails) {
         super(context, resource, movieDetails);
         this.context = context;
         this.movieDetailsList = movieDetails;
@@ -38,7 +38,7 @@ public class UpcomingMovieAdapter extends ArrayAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        UpcomingMovies details = movieDetailsList.get(position);
+        Movies details = movieDetailsList.get(position);
 
         View view = LayoutInflater.from(context).inflate(resource,parent,false);
 

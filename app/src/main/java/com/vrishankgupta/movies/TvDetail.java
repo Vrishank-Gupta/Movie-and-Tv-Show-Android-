@@ -31,7 +31,7 @@ import java.net.URL;
 public class TvDetail extends AppCompatActivity {
 
     ImageView detailImage1;
-    TextView detailTitle1,date1,rating1,overview1;
+    TextView detailTitle1,date1,rating1,overview1,language;
     String key;
     ImageButton youButTv;
     Button recommendTv;
@@ -46,6 +46,7 @@ public class TvDetail extends AppCompatActivity {
         detailTitle1 = findViewById(R.id.detailTitle1);
         date1 = findViewById(R.id.date1);
         rating1 = findViewById(R.id.rating1);
+        language = findViewById(R.id.language1);
         recommendTv = findViewById(R.id.recommendTv);
         overview1 = findViewById(R.id.overview1);
 
@@ -59,6 +60,7 @@ public class TvDetail extends AppCompatActivity {
             date1.setText(show.getFirst_air_date());
             rating1.setText(rating1.getText()+String.valueOf(show.getVote_average()));
             overview1.setText(show.getOverview());
+            language.setText(language.getText()+show.getLanguage());
             new myTask().execute("http://api.themoviedb.org/3/tv/"+show.getId() +"/videos?api_key=091aa3d78da969a59546613254d71896");
 
         }

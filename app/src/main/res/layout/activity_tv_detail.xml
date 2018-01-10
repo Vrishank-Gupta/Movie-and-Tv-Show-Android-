@@ -43,6 +43,18 @@
             android:id="@+id/date1"
             android:layout_marginTop="10dp"
             android:textSize="13sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/detailImage1"
+            android:layout_below="@id/date1"
+            android:id="@+id/language1"
+            android:text="Language:- "
+
+            android:textSize="13sp"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="5dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

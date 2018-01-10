@@ -11,7 +11,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.vrishankgupta.movies.Movies.TopRatedMovie;
-import com.vrishankgupta.movies.Movies.UpcomingMovies;
+import com.vrishankgupta.movies.Movies.Movies;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -94,7 +94,7 @@ public class MovieMain extends AppCompatActivity {
                 intent.putExtra("MOVIE_DETAILS_TOP", (TopRatedMovie)parent.getItemAtPosition(position));
 
                 else
-                    intent.putExtra("MOVIE_UPCOMING",(UpcomingMovies)parent.getItemAtPosition(position));
+                    intent.putExtra("MOVIE_UPCOMING",(Movies)parent.getItemAtPosition(position));
                 startActivity(intent);
             }
         });
@@ -134,14 +134,14 @@ public class MovieMain extends AppCompatActivity {
             try {
                 jsonObject = new JSONObject(s);
 
-                ArrayList<UpcomingMovies> upcomingMovies = new ArrayList<>();
+                ArrayList<Movies> upcomingMovies = new ArrayList<>();
 
                 JSONArray jsonArray = jsonObject.getJSONArray("results");
 
                 for(int i = 0;i<jsonArray.length();i++)
                 {
                     JSONObject object = jsonArray.getJSONObject(i);
-                    UpcomingMovies movies = new UpcomingMovies();
+                    Movies movies = new Movies();
                     movies.setOriginal_title(object.getString("original_title"));
                     movies.setId(object.getString("id"));
                     movies.setOverview(object.getString("overview"));
@@ -150,6 +150,7 @@ public class MovieMain extends AppCompatActivity {
                     movies.setVote_average(object.getString("vote_average"));
                     movies.setPoster_path(object.getString("poster_path"));
                     movies.setBackdrop_path(object.getString("backdrop_path"));
+                    movies.setLanguage(object.getString("original_language"));
                     upcomingMovies.add(movies);
                 }
                 UpcomingMovieAdapter movieArrayAdapter = new UpcomingMovieAdapter(MovieMain.this,R.layout.lv_detail,upcomingMovies);
@@ -210,6 +211,7 @@ public class MovieMain extends AppCompatActivity {
                     movieDetails.setRelease_date(object.getString("release_date"));
                     movieDetails.setPoster_path(object.getString("poster_path"));
                     movieDetails.setBackdrop_path(object.getString("backdrop_path"));
+                    movieDetails.setLanguage(object.getString("original_language"));
                     movieList.add(movieDetails);
                 }
 
@@ -252,6 +254,7 @@ public class MovieMain extends AppCompatActivity {
             try {
                 JSONObject jsonObject = new JSONObject(s);
                 setTitle("Similar to "+jsonObject.getString("original_title"));
+
 
             } catch (JSONException e) {
                 e.printStackTrace();

@@ -6,13 +6,24 @@ import java.io.Serializable;
  * Created by vrishankgupta on 08/01/18.
  */
 
-public class UpcomingMovies implements Serializable {
+public class Movies implements Serializable {
     private String vote_average;
     private String original_title;
     private String overview;
     private String release_date;
     private String id;
     private String backdrop_path;
+    private String language;
+
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
+    }
+
 
     public String getBackdrop_path() {
         return backdrop_path;

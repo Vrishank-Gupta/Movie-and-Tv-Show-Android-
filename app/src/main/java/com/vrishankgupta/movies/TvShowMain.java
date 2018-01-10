@@ -130,6 +130,7 @@ public class TvShowMain extends AppCompatActivity {
                     movies.setVote_average(object.getString("vote_average"));
                     movies.setPoster_path(object.getString("poster_path"));
                     movies.setBackdrop_path(object.getString("backdrop_path"));
+                    movies.setLanguage(object.getString("original_language"));
                     upcomingMovies.add(movies);
                 }
                 TvAdapter movieArrayAdapter = new TvAdapter(TvShowMain.this,R.layout.lv_detail,upcomingMovies);

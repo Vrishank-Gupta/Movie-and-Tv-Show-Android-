@@ -44,6 +44,9 @@ public class MovieArrayAdapter extends ArrayAdapter {
 
         TextView movieName = view.findViewById(R.id.lvTv);
         ImageView image = view.findViewById(R.id.lvImage);
+        TextView lvRating = view.findViewById(R.id.lvRating);
+
+        lvRating.setText(String.valueOf(details.getVote_average()));
 
         movieName.setText(details.getOriginal_title());
 

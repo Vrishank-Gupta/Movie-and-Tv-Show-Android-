@@ -16,6 +16,16 @@ public class TopRatedMovie implements Serializable{
     private String id;
     private String backdrop_path;
 
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
+    }
+
+    private String language;
+
     public String getBackdrop_path() {
         return backdrop_path;
     }

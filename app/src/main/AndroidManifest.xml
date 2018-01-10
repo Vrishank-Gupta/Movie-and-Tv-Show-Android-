@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.vrishankgupta.movies">
 
+
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -25,6 +26,7 @@
         <activity android:name=".TvOption" />
         <activity android:name=".MovieDetail" />
         <activity android:name=".TvDetail" />
+        <activity android:name=".SearchActivity"></activity>
     </application>
 
 </manifest>

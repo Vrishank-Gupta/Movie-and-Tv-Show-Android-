@@ -13,6 +13,15 @@ public class Tv implements Serializable{
     private String overview;
     private String poster_path;
     private String backdrop_path;
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
+    }
+
+    private String language;
 
     public String getId() {
         return id;

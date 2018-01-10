@@ -15,7 +15,7 @@ import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 import com.vrishankgupta.movies.Movies.TopRatedMovie;
-import com.vrishankgupta.movies.Movies.UpcomingMovies;
+import com.vrishankgupta.movies.Movies.Movies;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,13 +32,13 @@ import java.net.URL;
 public class MovieDetail extends AppCompatActivity {
 
     ImageView detailImage;
-    TextView detailTitle,date,rating,overview;
+    TextView detailTitle,date,rating,overview,language;
     ImageButton youButMovie;
     Button recommendMovie;
     String key;
     Boolean flag;
     TopRatedMovie topRatedMovie;
-    UpcomingMovies upcomingMovies;
+    Movies movies;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +48,7 @@ public class MovieDetail extends AppCompatActivity {
         recommendMovie = findViewById(R.id.recommendMovie);
         detailImage = findViewById(R.id.detailImage);
         youButMovie = findViewById(R.id.youButMovie);
+        language = findViewById(R.id.language);
 
         detailTitle = findViewById(R.id.detailTitle);
         date = findViewById(R.id.date);
@@ -66,6 +67,7 @@ public class MovieDetail extends AppCompatActivity {
                 date.setText(topRatedMovie.getRelease_date());
                 rating.setText(rating.getText()+String.valueOf(topRatedMovie.getVote_average()));
                 overview.setText(topRatedMovie.getOverview());
+                language.setText(topRatedMovie.getLanguage());
                 flag =false;
                 new myTask().execute("http://api.themoviedb.org/3/movie/"+topRatedMovie.getId() +"/videos?api_key=091aa3d78da969a59546613254d71896");
 
@@ -76,17 +78,18 @@ public class MovieDetail extends AppCompatActivity {
 
         else if(MovieMain.t==3)
         {
-            upcomingMovies = (UpcomingMovies) getIntent().getExtras().getSerializable("MOVIE_UPCOMING");
-            if(upcomingMovies != null)
+            movies = (Movies) getIntent().getExtras().getSerializable("MOVIE_UPCOMING");
+            if(movies != null)
             {
-                setTitle(upcomingMovies.getOriginal_title());
-                Picasso.with(this).load("https://image.tmdb.org/t/p/w500/" + upcomingMovies.getBackdrop_path()).into(detailImage);
-                detailTitle.setText(upcomingMovies.getOriginal_title());
-                date.setText(upcomingMovies.getRelease_date());
-                rating.setText(rating.getText()+String.valueOf(upcomingMovies.getVote_average()));
-                overview.setText(upcomingMovies.getOverview());
+                setTitle(movies.getOriginal_title());
+                Picasso.with(this).load("https://image.tmdb.org/t/p/w500/" + movies.getBackdrop_path()).into(detailImage);
+                detailTitle.setText(movies.getOriginal_title());
+                date.setText(movies.getRelease_date());
+                rating.setText(rating.getText()+String.valueOf(movies.getVote_average()));
+                overview.setText(movies.getOverview());
+                language.setText(language.getText() + movies.getLanguage());
                 flag = true;
-                new myTask().execute("http://api.themoviedb.org/3/movie/"+upcomingMovies.getId() +"/videos?api_key=091aa3d78da969a59546613254d71896");
+                new myTask().execute("http://api.themoviedb.org/3/movie/"+ movies.getId() +"/videos?api_key=091aa3d78da969a59546613254d71896");
             }
             else
                 Toast.makeText(this, "No Upcoming", Toast.LENGTH_SHORT).show();
@@ -110,7 +113,7 @@ public class MovieDetail extends AppCompatActivity {
                 if(flag)
                 {
                     Intent i = new Intent(MovieDetail.this,MovieMain.class);
-                    i.putExtra("upcoming",upcomingMovies.getId());
+                    i.putExtra("upcoming", movies.getId());
                     startActivity(i);
                 }
 
