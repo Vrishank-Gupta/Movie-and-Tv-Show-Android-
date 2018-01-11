@@ -3,6 +3,7 @@ package com.vrishankgupta.movies;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -45,19 +46,16 @@ public class TvShowMain extends AppCompatActivity {
                 setTitle("On Air TV Shows");
                 new tvTask().execute("https://api.themoviedb.org/3/tv/on_the_air?api_key=091aa3d78da969a59546613254d71896&language=en-US&page=1");
             }
-
             else if (type.equals("Popular"))
             {
                 setTitle("Popular TV Shows");
                 new tvTask().execute("https://api.themoviedb.org/3/tv/popular?api_key=091aa3d78da969a59546613254d71896&language=en-US&page=1");
-
             }
 
             else if (type.equals("Top Rated"))
             {
                 setTitle("Top Rated TV Shows");
                 new tvTask().execute("https://api.themoviedb.org/3/tv/top_rated?api_key=091aa3d78da969a59546613254d71896&language=en-US&page=1");
-
             }
         }
 
@@ -67,6 +65,7 @@ public class TvShowMain extends AppCompatActivity {
             new tvTask().execute("https://api.themoviedb.org/3/tv/"+ tvId+ "/recommendations?api_key=091aa3d78da969a59546613254d71896&language=en-US&page=1");
 
         }
+        Handler h = new Handler();
 
         lvTv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -74,8 +73,12 @@ public class TvShowMain extends AppCompatActivity {
                 i = new Intent(TvShowMain.this, TvDetail.class);
                 i.putExtra("TvIntent", (Tv) parent.getItemAtPosition(position));
                 Log.d("mainInt", "onItemClick: ");
-                new seasonTask().execute("https://api.themoviedb.org/3/tv/"+movies.getId()+"?api_key=091aa3d78da969a59546613254d71896&language=en-US\n");
-                startActivity(i);
+                //For Season count
+//                new seasonTask().execute("https://api.themoviedb.org/3/search/multi?api_key=091aa3d78da969a59546613254d71896&language=en-US&page=1&include_adult=true");
+
+               startActivity(i);
+
+
             }
         });
     }
@@ -97,7 +100,7 @@ public class TvShowMain extends AppCompatActivity {
                 e.printStackTrace();
             }
             try {
-                HttpURLConnection urlConnection = null;
+                HttpURLConnection urlConnection;
                 urlConnection = (HttpURLConnection) url.openConnection();
                 InputStream inputStream = urlConnection.getInputStream();
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
@@ -199,7 +202,6 @@ public class TvShowMain extends AppCompatActivity {
                 JSONObject jsonObject = new JSONObject(s);
                 movies.setEpisodeCount(jsonObject.getString("number_of_episodes"));
                 movies.setSeasonCount(jsonObject.getString("number_of_seasons"));
-                startActivity(i);
                 Log.d("epis", movies.getEpisodeCount());
                 Log.d("seasons", movies.getSeasonCount());
             } catch (JSONException e) {
