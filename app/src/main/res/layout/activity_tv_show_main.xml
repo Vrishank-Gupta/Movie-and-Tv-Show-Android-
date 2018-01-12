@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         android:padding="10dp"
         android:divider="@null"
+        android:dividerHeight="10sp"
         tools:listitem="@layout/lv_detail"
         android:id="@+id/lvTv_show"/>
 

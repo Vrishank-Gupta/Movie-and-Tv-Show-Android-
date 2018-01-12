@@ -13,6 +13,7 @@
         android:layout_height="match_parent"
         android:id="@+id/searchLv"
         android:divider="@null"
+        android:dividerHeight="10sp"
         android:padding="10dp"
         tools:listitem="@layout/lv_detail"/>
 

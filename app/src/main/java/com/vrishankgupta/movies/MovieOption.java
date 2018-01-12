@@ -13,7 +13,9 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class MovieOption extends AppCompatActivity {
@@ -25,7 +27,7 @@ public class MovieOption extends AppCompatActivity {
     public static final String TAG = "Check";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+            super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_option);
         tv = findViewById(R.id.title);
         setTitle("Movies");

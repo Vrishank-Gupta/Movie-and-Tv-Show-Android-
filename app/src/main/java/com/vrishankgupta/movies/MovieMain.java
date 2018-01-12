@@ -61,7 +61,6 @@ public class MovieMain extends AppCompatActivity {
                 } else
                     Toast.makeText(this, "Ohh,Snap!", Toast.LENGTH_SHORT).show();
 
-
                 if (t == 1) {
                     new TopRatedTask().execute("https://api.themoviedb.org/3/movie/popular?api_key=091aa3d78da969a59546613254d71896&language=en-US&page=1");
                 } else if (t == 2) {
