@@ -39,7 +39,7 @@ public class MovieMain extends AppCompatActivity {
         String upId = getIntent().getExtras().getString("upcoming");
         String topId = getIntent().getExtras().getString("popular");
         lvMovie = findViewById(R.id.lvMovie);
-        ratingBar = findViewById(R.id.rating);
+        ratingBar = findViewById(R.id.ratingBarMovie);
 
         if(upId == null && topId == null) {
             type = getIntent().getExtras().getString("Type");

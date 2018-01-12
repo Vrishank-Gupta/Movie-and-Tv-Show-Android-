@@ -1,7 +1,6 @@
 package com.vrishankgupta.movies;
 
 import android.content.Intent;
-import android.graphics.Movie;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -9,7 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -57,6 +55,7 @@ public class MovieDetail extends AppCompatActivity {
         rating = findViewById(R.id.rating);
         overview = findViewById(R.id.overview);
         Picasso.with(this).load("http://icons.iconarchive.com/icons/dakirby309/simply-styled/256/YouTube-icon.png").into(youButMovie);
+
 
         if(MovieMain.t ==1 || MovieMain.t ==2)
         {
