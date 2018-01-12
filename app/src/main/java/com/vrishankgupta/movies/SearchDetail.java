@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,22 +35,26 @@ public class SearchDetail extends AppCompatActivity {
     ImageView detailImage1;
     TextView detailTitle1,date1,rating1,overview1,language;
     String key;
-    ImageView youButTv;
+    ImageView youButSearch;
     Button recommendTv;
     SearchItem show;
+    RatingBar ratingBarSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_detail);
         detailImage1 = findViewById(R.id.detailImage2);
-        youButTv = findViewById(R.id.youButTv1);
+        youButSearch = findViewById(R.id.youButSearch);
         detailTitle1 = findViewById(R.id.detailTitle2);
         date1 = findViewById(R.id.date2);
         rating1 = findViewById(R.id.rating2);
         language = findViewById(R.id.language2);
+        ratingBarSearch = findViewById(R.id.ratingBarSearch);
         recommendTv = findViewById(R.id.recommendTv1);
         overview1 = findViewById(R.id.overview2);
+        Picasso.with(this).load("http://icons.iconarchive.com/icons/dakirby309/simply-styled/256/YouTube-icon.png").into(youButSearch);
+
 
         show = (SearchItem)getIntent().getExtras().getSerializable("searchIntent");
 
@@ -60,6 +65,7 @@ public class SearchDetail extends AppCompatActivity {
             detailTitle1.setText(show.getOriginal_title());
             date1.setText(show.getRelease_date());
             rating1.setText(rating1.getText()+String.valueOf(show.getVote_average()));
+            ratingBarSearch.setRating(Float.valueOf(show.getVote_average()));
             overview1.setText(show.getOverview());
             language.setText(language.getText()+show.getOriginal_language());
             if(show.getType().equals("tv"))
@@ -73,7 +79,7 @@ public class SearchDetail extends AppCompatActivity {
         else
             Toast.makeText(this, "Some Error", Toast.LENGTH_SHORT).show();
 
-        youButTv.setOnClickListener(new View.OnClickListener() {
+        youButSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d("TYD", "onClick: ");

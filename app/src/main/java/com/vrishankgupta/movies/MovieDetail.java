@@ -56,6 +56,7 @@ public class MovieDetail extends AppCompatActivity {
         date = findViewById(R.id.date);
         rating = findViewById(R.id.rating);
         overview = findViewById(R.id.overview);
+        Picasso.with(this).load("http://icons.iconarchive.com/icons/dakirby309/simply-styled/256/YouTube-icon.png").into(youButMovie);
 
         if(MovieMain.t ==1 || MovieMain.t ==2)
         {

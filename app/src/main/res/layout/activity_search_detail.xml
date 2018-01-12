@@ -104,14 +104,13 @@
         android:id="@+id/youLvTv1"
         android:layout_marginTop="0dp">
         <ImageView
-            android:id="@+id/youButTv1"
+            android:id="@+id/youButSearch"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_gravity="top"
             android:layout_marginStart="56dp"
-            android:src="@drawable/trail"
             />
 
         <Button

@@ -53,6 +53,8 @@ public class TvDetail extends AppCompatActivity {
         language = findViewById(R.id.language1);
         recommendTv = findViewById(R.id.recommendTv);
         overview1 = findViewById(R.id.overview1);
+        Picasso.with(this).load("http://icons.iconarchive.com/icons/dakirby309/simply-styled/256/YouTube-icon.png").into(youButTv);
+
 
         show = (Tv)getIntent().getExtras().getSerializable("TvIntent");
 

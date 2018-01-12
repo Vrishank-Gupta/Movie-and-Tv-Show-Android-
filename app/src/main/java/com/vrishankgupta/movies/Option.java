@@ -12,6 +12,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
+
 import java.io.IOException;
 
 public class Option extends AppCompatActivity {
@@ -35,6 +37,7 @@ public class Option extends AppCompatActivity {
         movieOption = findViewById(R.id.movieOption);
 
         searchBut = findViewById(R.id.searchBut);
+        Picasso.with(this).load("http://icons.iconarchive.com/icons/iconleak/atrous/256/search-icon.png").into(searchBut);
         searchEt = findViewById(R.id.searchEt);
         searchEt.setText("");
         try {

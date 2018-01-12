@@ -22,7 +22,8 @@ public class welcome extends AppCompatActivity {
             public void run() {
                 Intent i = new Intent(
                                         welcome.this,
-                                        Option.class);
+                                        Option.class
+                                        );
                 startActivity(i);
                 finish();
             }
