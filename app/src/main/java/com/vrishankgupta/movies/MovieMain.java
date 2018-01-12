@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.RatingBar;
 import android.widget.Toast;
 
 import com.vrishankgupta.movies.Movies.Movies;
@@ -29,6 +30,7 @@ public class MovieMain extends AppCompatActivity {
     static int t=0;
     ListView lvMovie;
     String type;
+    RatingBar ratingBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +39,7 @@ public class MovieMain extends AppCompatActivity {
         String upId = getIntent().getExtras().getString("upcoming");
         String topId = getIntent().getExtras().getString("popular");
         lvMovie = findViewById(R.id.lvMovie);
+        ratingBar = findViewById(R.id.rating);
 
         if(upId == null && topId == null) {
             type = getIntent().getExtras().getString("Type");

@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:padding="10dp"
+    android:background="@drawable/back"
+
     android:layout_height="match_parent"
     tools:context="com.vrishankgupta.movies.TvDetail">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <RelativeLayout
         android:layout_width="match_parent"
         android:id="@+id/rl1"
@@ -22,6 +27,7 @@
 
         <TextView
             android:layout_width="wrap_content"
+            android:textColor="@color/blue"
             android:layout_toRightOf="@+id/detailImage1"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
@@ -37,6 +43,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/blue"
             android:layout_below="@+id/detailTitle1"
             android:layout_toRightOf="@id/detailImage1"
             android:layout_marginLeft="5dp"
@@ -48,6 +55,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toEndOf="@id/detailImage1"
+            android:textColor="@color/blue"
+
             android:layout_below="@id/date1"
             android:id="@+id/language1"
             android:text="Language:- "
@@ -55,28 +64,21 @@
             android:textSize="13sp"
             android:layout_marginTop="5dp"
             android:layout_marginStart="5dp"/>
-        <TextView
+        <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toEndOf="@id/detailImage1"
             android:layout_below="@id/language1"
             android:layout_marginTop="5dp"
-            android:text="Season Count:- "
+            android:text="Season Info"
             android:layout_marginStart="5dp"
             android:id="@+id/seasons"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/detailImage1"
-            android:layout_below="@id/seasons"
-            android:layout_marginTop="5dp"
-            android:text="Episode Count:- "
-            android:layout_marginStart="5dp"
-            android:id="@+id/episode"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:textColor="@color/blue"
+
             android:layout_marginLeft="5dp"
             android:layout_marginTop="10dp"
             android:id="@+id/rating1"
@@ -85,52 +87,81 @@
             android:layout_below="@+id/detailImage1"
             />
     </RelativeLayout>
-    <LinearLayout
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_below="@id/rl1"
+            android:id="@+id/ll1"
+            android:layout_height="wrap_content">
+            <RatingBar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Base.Widget.AppCompat.RatingBar.Indicator"
+                android:id="@+id/ratingBarTv"
+                android:numStars="10"
+                android:progressTint="@color/yellow"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="5dp"
+                android:padding="5dp"
+                android:stepSize="0.1"/>
+        </LinearLayout>
+
+
+        <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/rl1"
+        android:layout_below="@id/ll1"
         android:gravity="center"
-        android:weightSum="3"
-        android:padding="10dp"
         android:id="@+id/youLvTv"
-        android:layout_marginTop="8dp">
-        <ImageButton
-            android:id="@+id/youButTv"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="2"
-            android:src="@drawable/trail"
-            />
+        android:layout_marginTop="-15dp">
+
+            <ImageView
+                android:id="@+id/youButTv"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_alignParentStart="true"
+                android:layout_gravity="top"
+                android:padding="0dp"
+                android:layout_marginStart="56dp"
+                android:src="@drawable/trail" />
 
         <Button
-            android:layout_width="0dp"
+            android:padding="15dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginStart="10dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="end"
+            android:textSize="20sp"
+            android:layout_marginEnd="44dp"
+            android:background="@drawable/login_selector"
+            android:src="@mipmap/ic_launcher"
             android:text="Similar"
             android:id="@+id/recommendTv"
-            />
+            android:textColor="@color/blue"
+        />
 
+    </RelativeLayout>
 
-    </LinearLayout>
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/youLvTv"
         android:padding="5dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="-10dp"
         >
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/overview1"
+            android:textColor="@color/blue"
+
             android:textSize="20sp"
             android:textStyle="italic"
             style="@style/Base.TextAppearance.AppCompat.Subhead"
             android:text="Overview"/>
-    </ScrollView>
-</RelativeLayout>
+    </LinearLayout>
+    </RelativeLayout>
+</ScrollView>
 
 
 

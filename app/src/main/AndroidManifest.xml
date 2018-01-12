@@ -12,13 +12,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".welcome">
+
+        </activity>
+        <activity android:name=".Option" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Option" />
         <activity android:name=".MovieMain" />
         <activity android:name=".TvShowMain" />
         <activity android:name=".MovieOption" />
@@ -26,7 +28,8 @@
         <activity android:name=".MovieDetail" />
         <activity android:name=".TvDetail" />
         <activity android:name=".SearchActivity" />
-        <activity android:name=".SearchDetail"></activity>
+        <activity android:name=".SearchDetail" />
+        <activity android:name=".SeasonsDetail"></activity>
     </application>
 
 </manifest>

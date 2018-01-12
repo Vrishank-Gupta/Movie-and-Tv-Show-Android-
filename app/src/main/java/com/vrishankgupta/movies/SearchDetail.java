@@ -34,7 +34,7 @@ public class SearchDetail extends AppCompatActivity {
     ImageView detailImage1;
     TextView detailTitle1,date1,rating1,overview1,language;
     String key;
-    ImageButton youButTv;
+    ImageView youButTv;
     Button recommendTv;
     SearchItem show;
 

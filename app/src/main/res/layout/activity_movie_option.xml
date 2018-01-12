@@ -3,11 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/back"
+    android:padding="10dp"
     tools:context="com.vrishankgupta.movies.MovieOption">
 
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:divider="@null"
+        tools:listitem="@layout/lv_detail"
         android:id="@+id/movieType"/>
 
 

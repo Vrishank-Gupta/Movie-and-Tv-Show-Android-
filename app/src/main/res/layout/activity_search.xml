@@ -5,12 +5,14 @@
     android:layout_height="match_parent"
     android:weightSum="5"
     android:padding="5dp"
+    android:background="@drawable/back"
     tools:context="com.vrishankgupta.movies.SearchActivity">
 
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/searchLv"
+        android:divider="@null"
         android:padding="10dp"
         tools:listitem="@layout/lv_detail"/>
 

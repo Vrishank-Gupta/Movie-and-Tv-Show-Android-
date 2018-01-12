@@ -66,7 +66,7 @@ public class TvOption extends AppCompatActivity {
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             LayoutInflater li = getLayoutInflater();
-            View itemView = li.inflate(R.layout.simple_detail,parent,false);
+            View itemView = li.inflate(R.layout.det,parent,false);
 
             String curr = getItem(position);
 

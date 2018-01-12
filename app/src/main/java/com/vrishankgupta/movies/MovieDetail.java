@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,11 +34,12 @@ public class MovieDetail extends AppCompatActivity {
 
     ImageView detailImage;
     TextView detailTitle,date,rating,overview,language;
-    ImageButton youButMovie;
+    ImageView youButMovie;
     Button recommendMovie;
     String key;
     Boolean flag;
     Movies topRatedMovie;
+    RatingBar ratingBarMovie;
     Movies movies;
 
     @Override
@@ -49,7 +51,7 @@ public class MovieDetail extends AppCompatActivity {
         detailImage = findViewById(R.id.detailImage);
         youButMovie = findViewById(R.id.youButMovie);
         language = findViewById(R.id.language);
-
+        ratingBarMovie = findViewById(R.id.ratingBarMovie);
         detailTitle = findViewById(R.id.detailTitle);
         date = findViewById(R.id.date);
         rating = findViewById(R.id.rating);
@@ -66,6 +68,7 @@ public class MovieDetail extends AppCompatActivity {
                 detailTitle.setText(topRatedMovie.getOriginal_title());
                 date.setText(topRatedMovie.getRelease_date());
                 rating.setText(rating.getText()+String.valueOf(topRatedMovie.getVote_average()));
+                ratingBarMovie.setRating(Float.valueOf(topRatedMovie.getVote_average()));
                 overview.setText(topRatedMovie.getOverview());
                 language.setText(language.getText()+topRatedMovie.getLanguage());
                 flag =false;
@@ -86,6 +89,8 @@ public class MovieDetail extends AppCompatActivity {
                 detailTitle.setText(movies.getOriginal_title());
                 date.setText(movies.getRelease_date());
                 rating.setText(rating.getText()+String.valueOf(movies.getVote_average()));
+                ratingBarMovie.setRating(Float.valueOf(movies.getVote_average()));
+
                 overview.setText(movies.getOverview());
                 language.setText(language.getText() + movies.getLanguage());
                 flag = true;

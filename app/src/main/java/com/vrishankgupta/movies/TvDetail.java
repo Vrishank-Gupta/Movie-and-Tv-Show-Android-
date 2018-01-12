@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,10 +32,11 @@ import java.net.URL;
 public class TvDetail extends AppCompatActivity {
 
     ImageView detailImage1;
-    TextView detailTitle1,date1,rating1,overview1,language,seasons,episode;
+    TextView detailTitle1,date1,rating1,overview1,language;
     String key;
-    ImageButton youButTv;
-    Button recommendTv;
+    ImageView youButTv;
+    Button recommendTv,seasons;
+    RatingBar ratingBarTv;
     Tv show;
 
     @Override
@@ -43,16 +45,18 @@ public class TvDetail extends AppCompatActivity {
         setContentView(R.layout.activity_tv_detail);
         detailImage1 = findViewById(R.id.detailImage1);
         youButTv = findViewById(R.id.youButTv);
-        seasons = findViewById(R.id.seasons);
-        episode = findViewById(R.id.episode);
         detailTitle1 = findViewById(R.id.detailTitle1);
         date1 = findViewById(R.id.date1);
+        ratingBarTv = findViewById(R.id.ratingBarTv);
         rating1 = findViewById(R.id.rating1);
+        seasons = findViewById(R.id.seasons);
         language = findViewById(R.id.language1);
         recommendTv = findViewById(R.id.recommendTv);
         overview1 = findViewById(R.id.overview1);
 
         show = (Tv)getIntent().getExtras().getSerializable("TvIntent");
+
+
 
         if(show !=null)
         {
@@ -62,9 +66,8 @@ public class TvDetail extends AppCompatActivity {
             date1.setText(show.getFirst_air_date());
             rating1.setText(rating1.getText()+String.valueOf(show.getVote_average()));
             overview1.setText(show.getOverview());
-            seasons.setText(seasons.getText()+show.getSeasonCount());
-            episode.setText(episode.getText()+show.getEpisodeCount());
             language.setText(language.getText()+show.getLanguage());
+            ratingBarTv.setRating(Float.valueOf(show.getVote_average()));
             new myTask().execute("http://api.themoviedb.org/3/tv/"+show.getId() +"/videos?api_key=091aa3d78da969a59546613254d71896");
         }
         else
@@ -85,6 +88,16 @@ public class TvDetail extends AppCompatActivity {
                 Intent i = new Intent(TvDetail.this,TvShowMain.class);
                 i.putExtra("TvRecommend",show.getId());
                 startActivity(i);
+            }
+        });
+        seasons.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Toast.makeText(TvDetail.this, "I'll implement it soon!", Toast.LENGTH_SHORT).show();
+                //                Intent i = new Intent(TvDetail.this,SeasonsDetail.class);
+//                i.putExtra("For_season",show.getId());
+//                startActivity(i);
             }
         });
     }

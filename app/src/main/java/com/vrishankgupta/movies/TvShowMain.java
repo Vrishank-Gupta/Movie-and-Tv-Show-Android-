@@ -65,7 +65,6 @@ public class TvShowMain extends AppCompatActivity {
             new tvTask().execute("https://api.themoviedb.org/3/tv/"+ tvId+ "/recommendations?api_key=091aa3d78da969a59546613254d71896&language=en-US&page=1");
 
         }
-        Handler h = new Handler();
 
         lvTv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -73,9 +72,6 @@ public class TvShowMain extends AppCompatActivity {
                 i = new Intent(TvShowMain.this, TvDetail.class);
                 i.putExtra("TvIntent", (Tv) parent.getItemAtPosition(position));
                 Log.d("mainInt", "onItemClick: ");
-                //For Season count
-//                new seasonTask().execute("https://api.themoviedb.org/3/search/multi?api_key=091aa3d78da969a59546613254d71896&language=en-US&page=1&include_adult=true");
-
                startActivity(i);
 
 
@@ -193,45 +189,6 @@ public class TvShowMain extends AppCompatActivity {
         }
     }
 
-    class seasonTask extends AsyncTask<String,Void,String>
-    {
-        @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
-            try {
-                JSONObject jsonObject = new JSONObject(s);
-                movies.setEpisodeCount(jsonObject.getString("number_of_episodes"));
-                movies.setSeasonCount(jsonObject.getString("number_of_seasons"));
-                Log.d("epis", movies.getEpisodeCount());
-                Log.d("seasons", movies.getSeasonCount());
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
 
-        @Override
-        protected String doInBackground(String... params) {
-            URL url = null;
-            try {
-                url = new URL(params[0]);
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            }
-            try {
-                HttpURLConnection urlConnection = null;
-                urlConnection = (HttpURLConnection) url.openConnection();
-                InputStream inputStream = urlConnection.getInputStream();
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-                String s = bufferedReader.readLine();
-                bufferedReader.close();
-
-                return s;
-
-            } catch (IOException e) {
-                Log.e("Error: ", e.getMessage(), e);
-            }
-            return null;
-        }
-    }
  }
 

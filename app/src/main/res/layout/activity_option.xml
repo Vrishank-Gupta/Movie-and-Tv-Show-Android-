@@ -1,66 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@drawable/back"
+    android:padding="5dp"
     android:orientation="vertical"
     android:layout_height="match_parent"
     tools:context="com.vrishankgupta.movies.Option">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
         android:weightSum="5">
 
     <EditText
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_weight="4"
+        android:padding="10dp"
+        android:ems="20"
+        android:hint="Search here"
+        android:background="@drawable/et_decorate"
         android:id="@+id/searchEt"/>
-        <ImageButton
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginStart="3dp"
-            android:layout_marginEnd="5dp"
+
+        <ImageView
             android:id="@+id/searchBut"
-            android:background="@color/white"
+            android:layout_width="0dp"
+            android:alpha="2"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="0dp"
+            android:layout_marginStart="3dp"
+            android:layout_weight="1"
             android:src="@drawable/s"
-            />
+            app:srcCompat="?android:attr/actionModeWebSearchDrawable" />
     </LinearLayout>
 
+
 <TextView
-    android:layout_marginTop="80dp"
     android:layout_width="match_parent"
+    android:layout_marginTop="80dp"
     android:textStyle="bold"
+    android:background="@drawable/login_selector"
     android:padding="20dp"
+
+    android:layout_marginStart="10dp"
+    android:layout_marginEnd="10dp"
+    android:layout_marginBottom="10dp"
+    android:shadowColor="@color/white"
     android:layout_height="wrap_content"
     android:id="@+id/tvOption"
+    android:textColor="@color/blue"
     android:text="TV Shows"
     style="@style/Base.TextAppearance.AppCompat.Headline"
     android:layout_gravity="center"
     android:gravity="center"/>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/colorPrimaryDark"/>
+
+
 
     <TextView
         android:layout_marginTop="80dp"
+        android:background="@drawable/login_selector"
         android:layout_width="match_parent"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="10dp"
+
+        android:layout_marginEnd="10dp"
         android:textStyle="bold"
         android:padding="20dp"
+        android:textColor="@color/blue"
         android:layout_height="wrap_content"
         android:id="@+id/movieOption"
         android:text="Movies"
         style="@style/Base.TextAppearance.AppCompat.Headline"
         android:layout_gravity="center"
         android:gravity="center"/>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/colorPrimaryDark"/>
-
-
 
 </LinearLayout>

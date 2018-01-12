@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:padding="5dp"
+    android:layout_height="match_parent">
+    <TextView
+        style="@style/Base.TextAppearance.AppCompat.Headline"
+        android:textSize="30sp"
+        android:layout_marginTop="70dp"
+        android:textStyle="bold"
+        android:textColor="@color/blue"
+        android:background="@drawable/login_selector"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="Hint"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/simple_de"/>
+
+</RelativeLayout>
