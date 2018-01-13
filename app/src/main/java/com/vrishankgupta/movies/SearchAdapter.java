@@ -45,6 +45,8 @@ import java.util.List;
             TextView movieName = view.findViewById(R.id.lvTv);
             ImageView image = view.findViewById(R.id.lvImage);
             TextView lvRating = view.findViewById(R.id.lvRating);
+            TextView editText = view.findViewById(R.id.editText);
+            editText.setText(details.getRelease_date());
 
             lvRating.setText(String.valueOf(details.getVote_average()));
 

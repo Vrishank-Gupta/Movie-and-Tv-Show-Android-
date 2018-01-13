@@ -2,27 +2,22 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:padding="5dp"
+    android:background="@drawable/welc"
     android:layout_height="match_parent">
+
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textColor="@color/tc"
-        android:id="@+id/wel"
-        android:textSize="45sp"
-        android:textStyle="italic"
-        android:text="@string/welcome1"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="163dp"
+        android:text="Entertainment"
         style="@style/Base.TextAppearance.AppCompat.Headline"
-
-        />
-
+        android:textStyle="bold"
+        android:textSize="40sp" />
     <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentBottom="true"
-        android:layout_below="@id/wel"
-        android:id="@+id/welcomeImage"
-        />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/we"/>
 
 </RelativeLayout>

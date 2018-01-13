@@ -23,7 +23,6 @@ public class TvAdapter extends ArrayAdapter {
 
     private List<Tv> tvList;
     private int resource;
-
     private Context context;
 
 
@@ -39,19 +38,15 @@ public class TvAdapter extends ArrayAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
 
         Tv details = tvList.get(position);
-
         View view = LayoutInflater.from(context).inflate(resource,parent,false);
-
         TextView movieName = view.findViewById(R.id.lvTv);
         ImageView image = view.findViewById(R.id.lvImage);
         TextView lvRating = view.findViewById(R.id.lvRating);
-
+        TextView editText = view.findViewById(R.id.editText);
+        editText.setText(details.getFirst_air_date());
         lvRating.setText(String.valueOf(details.getVote_average()));
-
         movieName.setText(details.getOriginal_name());
-
         Picasso.with(context).load("https://image.tmdb.org/t/p/w500/"+ details.getPoster_path()).into(image);
-
         return  view;
     }
 
@@ -60,5 +55,4 @@ public class TvAdapter extends ArrayAdapter {
     public Object getItem(int position) {
         return tvList.get(position);
     }
-
 }

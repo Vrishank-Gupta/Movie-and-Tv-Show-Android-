@@ -45,10 +45,12 @@ public class MovieArrayAdapter extends ArrayAdapter {
         TextView movieName = view.findViewById(R.id.lvTv);
         ImageView image = view.findViewById(R.id.lvImage);
         TextView lvRating = view.findViewById(R.id.lvRating);
+        TextView editText = view.findViewById(R.id.editText);
 
         lvRating.setText(String.valueOf(details.getVote_average()));
 
         movieName.setText(details.getOriginal_title());
+        editText.setText(details.getRelease_date());
 
         Picasso.with(context).load("https://image.tmdb.org/t/p/w500/"+ details.getPoster_path()).into(image);
 

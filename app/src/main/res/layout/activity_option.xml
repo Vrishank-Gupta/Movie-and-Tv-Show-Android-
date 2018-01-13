@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:background="@drawable/back"
@@ -13,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
+        android:layout_marginTop="10dp"
         android:weightSum="5">
 
     <EditText
@@ -29,11 +29,12 @@
             android:id="@+id/searchBut"
             android:layout_width="0dp"
             android:alpha="2"
-            android:layout_height="match_parent"
+            android:layout_height="40dp"
             android:layout_marginEnd="0dp"
             android:layout_marginStart="3dp"
             android:layout_weight="1"
-            app:srcCompat="?android:attr/actionModeWebSearchDrawable" />
+            android:src="@mipmap/ic_launcher"
+           />
     </LinearLayout>
 
 
@@ -43,7 +44,6 @@
     android:textStyle="bold"
     android:background="@drawable/login_selector"
     android:padding="20dp"
-
     android:layout_marginStart="10dp"
     android:layout_marginEnd="10dp"
     android:layout_marginBottom="10dp"
@@ -56,16 +56,12 @@
     android:layout_gravity="center"
     android:gravity="center"/>
 
-
-
-
     <TextView
         android:layout_marginTop="80dp"
         android:background="@drawable/login_selector"
         android:layout_width="match_parent"
         android:layout_marginStart="10dp"
         android:layout_marginBottom="10dp"
-
         android:layout_marginEnd="10dp"
         android:textStyle="bold"
         android:padding="20dp"
