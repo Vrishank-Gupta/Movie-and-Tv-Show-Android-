@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/back"
     android:padding="10dp"
+    android:id="@+id/movOpt"
     tools:context="com.vrishankgupta.movies.MovieOption">
 
     <ListView

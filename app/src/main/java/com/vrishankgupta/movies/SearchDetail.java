@@ -1,22 +1,25 @@
 package com.vrishankgupta.movies;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RatingBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 import com.vrishankgupta.movies.Search.SearchItem;
-import com.vrishankgupta.movies.TvShow.Tv;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -39,6 +42,7 @@ public class SearchDetail extends AppCompatActivity {
     Button recommendTv;
     SearchItem show;
     RatingBar ratingBarSearch;
+    ScrollView searchDet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +57,7 @@ public class SearchDetail extends AppCompatActivity {
         ratingBarSearch = findViewById(R.id.ratingBarSearch);
         recommendTv = findViewById(R.id.recommendTv1);
         overview1 = findViewById(R.id.overview2);
+        searchDet = findViewById(R.id.searchDet);
         Picasso.with(this).load("http://icons.iconarchive.com/icons/dakirby309/simply-styled/256/YouTube-icon.png").into(youButSearch);
 
 

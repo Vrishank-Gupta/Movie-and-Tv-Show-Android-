@@ -9,8 +9,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
+        android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="163dp"
+        android:layout_marginTop="168dp"
+        android:textColor="@color/colorPrimary"
         android:text="Entertainment"
         style="@style/Base.TextAppearance.AppCompat.Headline"
         android:textStyle="bold"
@@ -18,6 +20,7 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/we"/>
+        android:id="@+id/we"
+        />
 
 </RelativeLayout>

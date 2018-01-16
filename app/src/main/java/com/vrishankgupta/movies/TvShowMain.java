@@ -1,15 +1,22 @@
 package com.vrishankgupta.movies;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 import com.vrishankgupta.movies.TvShow.Tv;
 
 import org.json.JSONArray;
@@ -27,17 +34,18 @@ import java.util.ArrayList;
 
 public class TvShowMain extends AppCompatActivity {
 
-    ListView lvTv;
+    RecyclerView lvTv;
     Tv movies;
     Intent i;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tv_show_main);
+        setContentView(R.layout.movie_recyc);
 
         String tvId = getIntent().getExtras().getString("TvRecommend");
-        lvTv = findViewById(R.id.lvTv_show);
+        lvTv = findViewById(R.id.mov_rec2);
+
 
         if (tvId == null) {
             String type = getIntent().getExtras().getString("tvType");
@@ -66,17 +74,6 @@ public class TvShowMain extends AppCompatActivity {
 
         }
 
-        lvTv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                i = new Intent(TvShowMain.this, TvDetail.class);
-                i.putExtra("TvIntent", (Tv) parent.getItemAtPosition(position));
-                Log.d("mainInt", "onItemClick: ");
-               startActivity(i);
-
-
-            }
-        });
     }
 
     class tvTask extends AsyncTask<String,Void,String>
@@ -139,7 +136,9 @@ public class TvShowMain extends AppCompatActivity {
                     movies.setLanguage(object.getString("original_language"));
                     upcomingMovies.add(movies);
                 }
-                TvAdapter movieArrayAdapter = new TvAdapter(TvShowMain.this,R.layout.lv_detail,upcomingMovies);
+                TvAdapter movieArrayAdapter = new TvAdapter(getApplicationContext(), upcomingMovies);
+                RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+                lvTv.setLayoutManager(mLayoutManager);
 
                 lvTv.setAdapter(movieArrayAdapter);
 

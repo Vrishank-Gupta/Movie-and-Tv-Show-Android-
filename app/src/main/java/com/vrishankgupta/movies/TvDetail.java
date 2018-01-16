@@ -1,20 +1,24 @@
 package com.vrishankgupta.movies;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RatingBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 import com.vrishankgupta.movies.TvShow.Tv;
 
 import org.json.JSONArray;
@@ -38,6 +42,7 @@ public class TvDetail extends AppCompatActivity {
     Button recommendTv,seasons;
     RatingBar ratingBarTv;
     Tv show;
+    ScrollView tvDet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +54,7 @@ public class TvDetail extends AppCompatActivity {
         date1 = findViewById(R.id.date1);
         ratingBarTv = findViewById(R.id.ratingBarTv);
         rating1 = findViewById(R.id.rating1);
+        tvDet = findViewById(R.id.tvDet);
         seasons = findViewById(R.id.seasons);
         language = findViewById(R.id.language1);
         recommendTv = findViewById(R.id.recommendTv);

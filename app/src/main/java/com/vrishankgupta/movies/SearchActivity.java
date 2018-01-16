@@ -2,15 +2,16 @@ package com.vrishankgupta.movies;
 
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.vrishankgupta.movies.Search.SearchItem;
-import com.vrishankgupta.movies.TvShow.Tv;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -21,30 +22,22 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
 public class SearchActivity extends AppCompatActivity {
 
-    ListView lv;
+    RecyclerView lv;
+    LinearLayout searchAct;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search);
-
+        setContentView(R.layout.movie_recyc);
         String query = getIntent().getExtras().getString("query");
-        lv = findViewById(R.id.searchLv);
+        lv = findViewById(R.id.mov_rec2);
         setTitle("Search result for:- " + query.replaceAll("%20"," "));
         new myTask().execute("https://api.themoviedb.org/3/search/multi?api_key=091aa3d78da969a59546613254d71896&query="+query+"&page=1&include_adult=true");
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent i = new Intent(SearchActivity.this,SearchDetail.class);
-                i.putExtra("searchIntent",(SearchItem)parent.getItemAtPosition(position));
-                startActivity(i);
-            }
-        });
+
     }
 
 
@@ -108,7 +101,9 @@ public class SearchActivity extends AppCompatActivity {
 
                 }
 
-                SearchAdapter movieArrayAdapter = new SearchAdapter(SearchActivity.this,R.layout.lv_detail,searchItems);
+                SearchAdapter movieArrayAdapter = new SearchAdapter(searchItems,getApplicationContext());
+                RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+                lv.setLayoutManager(mLayoutManager);
                 lv.setAdapter(movieArrayAdapter);
 
             } catch (JSONException e) {

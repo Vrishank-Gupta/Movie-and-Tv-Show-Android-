@@ -1,18 +1,20 @@
 package com.vrishankgupta.movies;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 import java.io.IOException;
 
@@ -20,6 +22,7 @@ public class Option extends AppCompatActivity {
     TextView tvOption,movieOption;
     EditText searchEt;
     ImageView searchBut;
+    LinearLayout holw;
 
     public static boolean isConnected() throws InterruptedException, IOException
     {
@@ -35,10 +38,26 @@ public class Option extends AppCompatActivity {
         setTitle("Choose Option");
         tvOption = findViewById(R.id.tvOption);
         movieOption = findViewById(R.id.movieOption);
-
+        holw = findViewById(R.id.holw);
         searchBut = findViewById(R.id.searchBut);
         Picasso.with(this).load("http://icons.iconarchive.com/icons/iconleak/atrous/256/search-icon.png").into(searchBut);
         searchEt = findViewById(R.id.searchEt);
+        Picasso.with(this).load("https://i.stack.imgur.com/DoNjc.png").into(new Target() {
+            @Override
+            public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                holw.setBackground(new BitmapDrawable(bitmap));
+            }
+
+            @Override
+            public void onBitmapFailed(Drawable errorDrawable) {
+
+            }
+
+            @Override
+            public void onPrepareLoad(Drawable placeHolderDrawable) {
+
+            }
+        });
         searchEt.setText("");
         try {
             if (!isConnected())

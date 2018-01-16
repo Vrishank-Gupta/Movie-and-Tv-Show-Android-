@@ -1,16 +1,22 @@
 package com.vrishankgupta.movies;
 
-import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
 import android.widget.RatingBar;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 import com.vrishankgupta.movies.Movies.Movies;
 
 import org.json.JSONArray;
@@ -27,21 +33,24 @@ import java.net.URL;
 import java.util.ArrayList;
 
 public class MovieMain extends AppCompatActivity {
-    static int t=0;
-    ListView lvMovie;
+    static int t = 0;
+    RecyclerView lvm;
+    RelativeLayout movMain;
     String type;
     RatingBar ratingBar;
+    CardView cardView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_movie_main);
+        setContentView(R.layout.movie_recyc);
         String upId = getIntent().getExtras().getString("upcoming");
         String topId = getIntent().getExtras().getString("popular");
-        lvMovie = findViewById(R.id.lvMovie);
+        lvm = (RecyclerView) findViewById(R.id.mov_rec2);
         ratingBar = findViewById(R.id.ratingBarMovie);
+        cardView = findViewById(R.id.mov_cardView);
 
-        if(upId == null && topId == null) {
+        if (upId == null && topId == null) {
             type = getIntent().getExtras().getString("Type");
 
 
@@ -69,40 +78,20 @@ public class MovieMain extends AppCompatActivity {
                     new upcomingTask().execute("https://api.themoviedb.org/3/movie/upcoming?api_key=091aa3d78da969a59546613254d71896&language=en-US&page=1");
                 }
             }
-        }
-
-        else {
-            if(upId !=null)
-            {
-                new titleTask().execute("https://api.themoviedb.org/3/movie/"+upId+"?api_key=091aa3d78da969a59546613254d71896&language=en-US");
-                new upcomingTask().execute("https://api.themoviedb.org/3/movie/"+upId+"/recommendations?api_key=091aa3d78da969a59546613254d71896&language=en-US&page=1\n");
-            }
-
-            else if(topId !=null)
-            {
-                new titleTask().execute("https://api.themoviedb.org/3/movie/"+topId+"?api_key=091aa3d78da969a59546613254d71896&language=en-US");
-                new TopRatedTask().execute("https://api.themoviedb.org/3/movie/"+topId+"/recommendations?api_key=091aa3d78da969a59546613254d71896&language=en-US&page=1\n");
+        } else {
+            if (upId != null) {
+                new titleTask().execute("https://api.themoviedb.org/3/movie/" + upId + "?api_key=091aa3d78da969a59546613254d71896&language=en-US");
+                new upcomingTask().execute("https://api.themoviedb.org/3/movie/" + upId + "/recommendations?api_key=091aa3d78da969a59546613254d71896&language=en-US&page=1\n");
+            } else if (topId != null) {
+                new titleTask().execute("https://api.themoviedb.org/3/movie/" + topId + "?api_key=091aa3d78da969a59546613254d71896&language=en-US");
+                new TopRatedTask().execute("https://api.themoviedb.org/3/movie/" + topId + "/recommendations?api_key=091aa3d78da969a59546613254d71896&language=en-US&page=1\n");
 
             }
         }
-
-        lvMovie.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                Intent intent = new Intent(MovieMain.this, MovieDetail.class);
-                if(t==1 || t==2)
-                intent.putExtra("MOVIE_DETAILS_TOP", (Movies) parent.getItemAtPosition(position));
-
-                else
-                    intent.putExtra("MOVIE_UPCOMING",(Movies)parent.getItemAtPosition(position));
-                startActivity(intent);
-            }
-        });
     }
 
-    class upcomingTask extends AsyncTask<String,Void,String>
-    {
+
+    class upcomingTask extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... params) {
             URL url = null;
@@ -112,14 +101,14 @@ public class MovieMain extends AppCompatActivity {
                 e.printStackTrace();
             }
             try {
-                HttpURLConnection urlConnection = null;
-                    urlConnection = (HttpURLConnection) url.openConnection();
-                    InputStream inputStream = urlConnection.getInputStream();
-                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-                    String s = bufferedReader.readLine();
-                    bufferedReader.close();
+                HttpURLConnection urlConnection;
+                urlConnection = (HttpURLConnection) url.openConnection();
+                InputStream inputStream = urlConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+                String s = bufferedReader.readLine();
+                bufferedReader.close();
 
-                    return s;
+                return s;
 
             } catch (IOException e) {
                 Log.e("Error: ", e.getMessage(), e);
@@ -139,8 +128,7 @@ public class MovieMain extends AppCompatActivity {
 
                 JSONArray jsonArray = jsonObject.getJSONArray("results");
 
-                for(int i = 0;i<jsonArray.length();i++)
-                {
+                for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject object = jsonArray.getJSONObject(i);
                     Movies movies = new Movies();
                     movies.setOriginal_title(object.getString("original_title"));
@@ -154,21 +142,27 @@ public class MovieMain extends AppCompatActivity {
                     movies.setLanguage(object.getString("original_language"));
                     upcomingMovies.add(movies);
                 }
-                MovieArrayAdapter movieArrayAdapter = new MovieArrayAdapter(MovieMain.this,R.layout.lv_detail,upcomingMovies);
 
-                lvMovie.setAdapter(movieArrayAdapter);
+                MovieCardAdapter cardAdapter = new MovieCardAdapter(upcomingMovies, MovieMain.this);
 
+                if (lvm != null) {
+                    Log.d("Recycle", lvm.toString());
+                    RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+                    lvm.setLayoutManager(mLayoutManager);
+                    lvm.setAdapter(cardAdapter);
+                } else
+                    Log.d("LVM", String.valueOf(R.id.mov_rec2));
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
     }
 
-    class TopRatedTask extends AsyncTask<String,Void,String>
-    {
+    class TopRatedTask extends AsyncTask<String, Void, String> {
         protected void onPreExecute() {
             super.onPreExecute();
         }
+
         @Override
         protected String doInBackground(String... params) {
             URL url = null;
@@ -189,6 +183,7 @@ public class MovieMain extends AppCompatActivity {
             }
             return null;
         }
+
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
@@ -201,8 +196,7 @@ public class MovieMain extends AppCompatActivity {
 
                 JSONArray jsonArray = jsonObject.getJSONArray("results");
 
-                for (int i =0; i<jsonArray.length();i++)
-                {
+                for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject object = jsonArray.getJSONObject(i);
                     Movies movieDetails = new Movies();
                     movieDetails.setOriginal_title(object.getString("original_title"));
@@ -216,17 +210,18 @@ public class MovieMain extends AppCompatActivity {
                     movieList.add(movieDetails);
                 }
 
-                MovieArrayAdapter movieArrayAdapter = new MovieArrayAdapter(MovieMain.this,R.layout.lv_detail,movieList);
+                MovieCardAdapter movieArrayAdapter = new MovieCardAdapter(movieList, getApplicationContext());
+                RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+                lvm.setLayoutManager(mLayoutManager);
 
-                lvMovie.setAdapter(movieArrayAdapter);
+                lvm.setAdapter(movieArrayAdapter);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
     }
 
-    class titleTask extends AsyncTask<String,Void,String>
-    {
+    class titleTask extends AsyncTask<String, Void, String> {
 
         @Override
         protected String doInBackground(String... params) {
@@ -254,7 +249,7 @@ public class MovieMain extends AppCompatActivity {
             super.onPostExecute(s);
             try {
                 JSONObject jsonObject = new JSONObject(s);
-                setTitle("Similar to "+jsonObject.getString("original_title"));
+                setTitle("Similar to " + jsonObject.getString("original_title"));
 
 
             } catch (JSONException e) {
@@ -264,4 +259,5 @@ public class MovieMain extends AppCompatActivity {
         }
     }
 }
+
 

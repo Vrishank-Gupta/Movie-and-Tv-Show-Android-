@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardElevation="60dp"
+    android:id="@+id/sim_card"
+    android:background="@color/dark"
+    android:backgroundTint="@color/dark"
+    android:layout_marginStart="20dp"
+    android:layout_height="200dp">
+   <RelativeLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:padding="20dp">
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/ic_launcher_background"
+        android:id="@+id/sim_image"/>
+
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_toRightOf="@id/sim_image"
+           android:text="MoivieName"
+           android:textSize="20sp"
+           android:layout_marginStart="20dp"
+           android:textColor="@color/white"
+           android:id="@+id/sim_name"
+           />
+
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_toRightOf="@id/sim_image"
+           android:layout_below="@id/sim_name"
+           android:text="Rating"
+           android:id="@+id/sim_rating"
+           android:layout_marginStart="20dp"
+           android:textColor="@color/white"
+           android:layout_marginTop="10dp"/>
+
+   </RelativeLayout>
+</android.support.v7.widget.CardView>

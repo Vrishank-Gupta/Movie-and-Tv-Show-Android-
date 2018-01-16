@@ -9,4 +9,6 @@
     <color name="blue">#e5e8f1</color>
     <color name="yellow">#ffef10</color>
     <color name="black">#000000</color>
+    <color name="grayscale">#1e1e1e</color>
+    <color name="dark">#131212</color>
 </resources>
