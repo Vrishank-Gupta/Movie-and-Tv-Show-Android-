@@ -30,4 +30,5 @@ public class welcome extends AppCompatActivity {
 
         h.postDelayed(r,3000);
     }
+
 }

@@ -20,6 +20,7 @@
         android:layout_height="50dp"
         android:layout_weight="4"
         android:padding="10dp"
+        android:textColorHint="@color/colorPrimaryDark"
         android:ems="20"
         android:hint="Search here"
         android:background="@drawable/et_decorate"

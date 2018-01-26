@@ -11,11 +11,17 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.MediaController;
 import android.widget.RatingBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.VideoView;
 
+import com.google.android.youtube.player.YouTubeBaseActivity;
+import com.google.android.youtube.player.YouTubeInitializationResult;
+import com.google.android.youtube.player.YouTubePlayer;
+import com.google.android.youtube.player.YouTubePlayerView;
 import com.squareup.picasso.Picasso;
 import com.vrishankgupta.movies.Movies.Movies;
 
@@ -32,11 +38,10 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
-public class MovieDetail extends AppCompatActivity {
+public class MovieDetail extends YouTubeBaseActivity {
 
     ImageView detailImage;
     TextView detailTitle,date,rating,overview,language;
-    ImageView youButMovie;
     Button recommendMovie;
     String key;
     Boolean flag;
@@ -45,6 +50,8 @@ public class MovieDetail extends AppCompatActivity {
     Movies movies;
     ScrollView scrollView;
     RecyclerView rv_movie;
+    YouTubePlayerView videoView;
+    YouTubePlayer.OnInitializedListener onInitializedListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +60,6 @@ public class MovieDetail extends AppCompatActivity {
 
         recommendMovie = findViewById(R.id.recommendMovie);
         detailImage = findViewById(R.id.detailImage);
-        youButMovie = findViewById(R.id.youButMovie);
         language = findViewById(R.id.language);
         rv_movie = findViewById(R.id.rv_movie);
         scrollView = findViewById(R.id.movDet);
@@ -61,8 +67,8 @@ public class MovieDetail extends AppCompatActivity {
         detailTitle = findViewById(R.id.detailTitle);
         date = findViewById(R.id.date);
         rating = findViewById(R.id.rating);
+        videoView = findViewById(R.id.youtube_player);
         overview = findViewById(R.id.overview);
-        Picasso.with(this).load("http://icons.iconarchive.com/icons/dakirby309/simply-styled/256/YouTube-icon.png").into(youButMovie);
 
 
         if(MovieMain.t ==1 || MovieMain.t ==2)
@@ -113,15 +119,6 @@ public class MovieDetail extends AppCompatActivity {
 
         else
             Toast.makeText(this, "Some Error", Toast.LENGTH_SHORT).show();
-
-        youButMovie.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d("TYD", "onClick: ");
-                Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("vnd.youtube:" + key));
-                startActivity(i);
-            }
-        });
 
         recommendMovie.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -184,6 +181,21 @@ public class MovieDetail extends AppCompatActivity {
                 JSONObject jsonObject1 = jsonArray.getJSONObject(0);
                 key = jsonObject1.getString("key");
                 Log.d("Youtube", key);
+
+               onInitializedListener = new YouTubePlayer.OnInitializedListener() {
+                   @Override
+                   public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
+                        youTubePlayer.loadVideo(key);
+                   }
+
+                   @Override
+                   public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
+
+                   }
+               };
+                videoView.initialize(PlayerConfig.API_KEY,onInitializedListener);
+
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -210,7 +222,7 @@ public class MovieDetail extends AppCompatActivity {
                     movies.setOriginal_title(object.getString("original_title"));
                     movies.setId(object.getString("id"));
                     movies.setOverview(object.getString("overview"));
-                    movies.setPopularity(object.getString("popularity"));
+//                    movies.setPopularity(object.getString("popularity"));
                     movies.setRelease_date(object.getString("release_date"));
                     movies.setVote_average(object.getString("vote_average"));
                     movies.setPoster_path(object.getString("poster_path"));
@@ -226,6 +238,7 @@ public class MovieDetail extends AppCompatActivity {
             RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,false);
             rv_movie.setLayoutManager(mLayoutManager);
             rv_movie.setAdapter(adapter);
+
 
         }
 

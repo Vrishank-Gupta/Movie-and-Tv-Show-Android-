@@ -52,7 +52,7 @@ public class MovieCardAdapter extends RecyclerView.Adapter<MovieCardAdapter.vHol
     }
 
     @Override
-    public int getItemCount() {
+    public int getItemCount()  {
         return movieDetailsList.size();
     }
 

@@ -1,6 +1,8 @@
 package com.vrishankgupta.movies;
 
+import android.app.ProgressDialog;
 import android.graphics.Bitmap;
+import android.graphics.Movie;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
@@ -92,6 +94,16 @@ public class MovieMain extends AppCompatActivity {
 
 
     class upcomingTask extends AsyncTask<String, Void, String> {
+        ProgressDialog progressDialog;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressDialog = new ProgressDialog(MovieMain.this);
+            progressDialog.setMessage("Loading.....");
+            progressDialog.show();
+        }
+
         @Override
         protected String doInBackground(String... params) {
             URL url = null;
@@ -122,6 +134,7 @@ public class MovieMain extends AppCompatActivity {
             JSONObject jsonObject;
 
             try {
+                progressDialog.dismiss();
                 jsonObject = new JSONObject(s);
 
                 ArrayList<Movies> upcomingMovies = new ArrayList<>();
@@ -134,7 +147,7 @@ public class MovieMain extends AppCompatActivity {
                     movies.setOriginal_title(object.getString("original_title"));
                     movies.setId(object.getString("id"));
                     movies.setOverview(object.getString("overview"));
-                    movies.setPopularity(object.getString("popularity"));
+//                    movies.setPopularity(object.getString("popularity"));
                     movies.setRelease_date(object.getString("release_date"));
                     movies.setVote_average(object.getString("vote_average"));
                     movies.setPoster_path(object.getString("poster_path"));

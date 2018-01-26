@@ -125,7 +125,7 @@ public class SearchDetail extends AppCompatActivity {
                 e.printStackTrace();
             }
             try {
-                HttpURLConnection urlConnection = null;
+                HttpURLConnection urlConnection;
                 urlConnection = (HttpURLConnection) url.openConnection();
                 InputStream inputStream = urlConnection.getInputStream();
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
@@ -149,10 +149,9 @@ public class SearchDetail extends AppCompatActivity {
                 jsonObject = new JSONObject(s);
                 JSONArray jsonArray = jsonObject.getJSONArray("results");
 
-                JSONObject jsonObject1 = jsonArray.getJSONObject(0);
-                key = jsonObject1.getString("key");
+                JSONObject ob = jsonArray.getJSONObject(0);
+                key = ob.getString("key");
                 Log.d("Youtube", key);
-//                INTENT for Youtube
 
             } catch (JSONException e) {
                 e.printStackTrace();

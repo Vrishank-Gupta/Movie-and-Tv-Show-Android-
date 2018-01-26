@@ -1,22 +1,13 @@
 package com.vrishankgupta.movies;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
-import android.widget.RelativeLayout;
 
-import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Target;
 import com.vrishankgupta.movies.TvShow.Tv;
 
 import org.json.JSONArray;
@@ -69,8 +60,8 @@ public class TvShowMain extends AppCompatActivity {
 
         else
         {
-            new titleTask().execute("https://api.themoviedb.org/3/tv/" + tvId+ "?api_key=091aa3d78da969a59546613254d71896&language=en-US");
             new tvTask().execute("https://api.themoviedb.org/3/tv/"+ tvId+ "/recommendations?api_key=091aa3d78da969a59546613254d71896&language=en-US&page=1");
+            new titleTask().execute("https://api.themoviedb.org/3/tv/" + tvId+ "?api_key=091aa3d78da969a59546613254d71896&language=en-US");
 
         }
 
@@ -161,7 +152,7 @@ public class TvShowMain extends AppCompatActivity {
                 e.printStackTrace();
             }
             try {
-                HttpURLConnection urlConnection = null;
+                HttpURLConnection urlConnection;
                 urlConnection = (HttpURLConnection) url.openConnection();
                 InputStream inputStream = urlConnection.getInputStream();
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
